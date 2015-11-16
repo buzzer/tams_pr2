@@ -1,9 +1,0 @@
-<stack>
-  <description brief="race_pr2">race_pr2</description>
-  <author>SEbastian Rockel</author>
-  <license>BSD</license>  
-  <review status="unreviewed" notes=""/>
-  <url>http://ros.org/wiki/race_pr2</url>
-  <depend stack="ros" />
-
-</stack>
