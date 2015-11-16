@@ -1,0 +1,14 @@
+<package>
+  <description brief="race_bringup">
+
+     race_bringup contains startup files to fully or partially run the system
+
+  </description>
+  <author>Sebastian Rockel</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/race_bringup</url>
+
+</package>
+
+

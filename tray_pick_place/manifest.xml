@@ -1,0 +1,42 @@
+<package>
+  <description brief="tray_pick_place">
+
+     tray_pick_and_place_pkg
+
+  </description>
+  <author>oceanjinn</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/tray_pick_place_pkg</url>
+  <depend package="std_msgs"/>
+  <depend package="geometry_msgs"/>
+  <depend package="rospy"/>
+  <depend package="roscpp"/>
+  
+  <depend package="arm_navigation_msgs"/>
+  <depend package="kinematics_msgs"/>
+
+  <depend package="actionlib_msgs"/>
+  <depend package="pr2_controllers_msgs"/>
+  <!--depend package="pr2_pick_and_place_demos"/>
+  <depend package="object_manipulator"/-->
+  <!--depend package="planning_environment"/-->
+
+  <!--depend package="pr2_arm_navigation_perception"/-->
+  <!--depend package="mapping_rviz_plugin"/-->
+  
+  <!--depend package="tabletop_object_detector"/-->
+  <!--depend package="tabletop_collision_map_processing"/-->
+
+  <!--depend package = "object_manipulation_msgs" /-->
+  
+  <depend package = "actionlib" />
+  <!--depend package = "race_move_arms"/-->
+  <depend package = "race_tray_monitor"/>
+  <depend package = "nav_msgs"/>
+  <depend package = "sensor_msgs"/>
+  <depend package = "tf" />
+
+</package>
+
+

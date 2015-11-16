@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Load the static knowledge into the blackboard -->
+
+  <arg name="demo_11a" default="false"/>
+  <arg name="demo_11b" default="false"/>
+  <arg name="demo_11c" default="false"/>
+  <arg name="demo_12a" default="false"/>
+  <arg name="demo_12b" default="false"/>
+  <arg name="demo_21a" default="false"/>
+  <arg name="demo_21b" default="false"/>
+  <arg name="demo_21b2" default="false"/>
+  <arg name="demo_21c" default="false"/>
+  <arg name="demo_22a" default="false"/>
+  <arg name="demo_22b" default="false"/>
+  <arg name="demo_24a" default="false"/>
+  <arg name="demo_24b" default="false"/>
+  <arg name="serve_clear" default="false"/>
+  <arg name="oru_demo" default="false"/>
+  <arg name="oru_ecai" default="false"/>
+  <arg name="demo_311a" default="false"/>
+  <arg name="demo_311b" default="false"/>
+  <arg name="demo_iros15b" default="false"/> <!-- IROS 2015 replanning -->
+  <arg name="demo_312a" default="false"/>
+  <arg name="demo_32a" default="false"/>
+
+  <!-- Demo 1.1 -->
+  <param if="$(arg demo_11a)" name="/race_shop2_planner/domain" value="$(find race_shop2_planner)/domains/race_owl_domain.lisp" />
+  <param if="$(arg demo_11b)" name="/race_shop2_planner/domain" value="$(find race_shop2_planner)/domains/race_owl_domain.lisp" />
+  <param if="$(arg demo_11c)" name="/race_shop2_planner/domain" value="$(find race_shop2_planner)/domains/race_owl_domain.lisp" />
+
+  <!-- Demo 1.2 -->
+  <param if="$(arg demo_12a)" name="/race_shop2_planner/domain" value="$(find race_shop2_planner)/domains/race_owl_domain.lisp" />
+  <param if="$(arg demo_12b)" name="/race_shop2_planner/domain" value="$(find race_shop2_planner)/domains/race_owl_domain.lisp" />
+
+  <!-- Demo 2.1 -->
+  <param if="$(arg demo_21a)" name="/race_shop2_planner/domain" value="$(find race_shop2_planner)/domains/race_owl_domain.lisp" />
+  <param if="$(arg demo_21b)" name="/race_shop2_planner/domain" value="$(find race_shop2_planner)/domains/race_owl_domain_scenario_2_1_B.lisp" />
+  <param if="$(arg demo_21b2)" name="/race_shop2_planner/domain" value="$(find race_shop2_planner)/domains/race_owl_domain_scenario_2_1_B_2.lisp" />
+  <param if="$(arg demo_21c)" name="/race_shop2_planner/domain" value="$(find race_shop2_planner)/domains/race_owl_domain_scenario_2_1_C.lisp" />
+
+  <!-- Demo 2.2 -->
+  <!-- no special initial knowledge required -->
+  <param if="$(arg demo_22a)" name="/race_shop2_planner/domain" value="$(find race_shop2_planner)/domains/race_owl_domain.lisp" />
+  <param if="$(arg demo_22b)" name="/race_shop2_planner/domain" value="$(find race_shop2_planner)/domains/race_owl_domain.lisp" />
+
+  <!-- Demo 2.4 -->
+  <param if="$(arg demo_24a)" name="/race_shop2_planner/domain" value="$(find race_shop2_planner)/domains/race_owl_domain.lisp" />
+  <param if="$(arg demo_24b)" name="/race_shop2_planner/domain" value="$(find race_shop2_planner)/domains/race_owl_domain.lisp" />
+
+  <!-- Demo serve_clear -->
+  <param if="$(arg serve_clear)" name="/race_shop2_planner/domain" value="$(find race_shop2_planner)/domains/race_owl_domain.lisp" />
+
+  <!-- Demo oru_demo -->
+  <param if="$(arg oru_demo)" name="/race_shop2_planner/domain" value="$(find race_shop2_planner)/domains/race_owl_domain.lisp" />
+
+  <!-- Demo oru_ecai -->
+  <param if="$(arg oru_ecai)" name="/race_shop2_planner/domain" value="$(find race_shop2_planner)/domains/race_owl_domain.lisp" />
+
+  <!--TODO double check if changes are needed:-->
+  <!--Demo 3.1.1-->
+  <param if="$(arg demo_311a)" name="/race_shop2_planner/domain" value="$(find race_shop2_planner)/domains/race_owl_domain.lisp" />
+  <!--param if="$(arg demo_311a)" name="/race_shop2_planner/domain" value="$(find race_shop2_planner)/domains/iros2015_new_domain.lisp" /-->
+  <param if="$(arg demo_311b)" name="/race_shop2_planner/domain" value="$(find race_shop2_planner)/domains/race_owl_domain.lisp" />
+  <param if="$(arg demo_iros15b)" name="/race_shop2_planner/domain" value="$(find race_shop2_planner)/domains/iros2015_new_domain.lisp" />
+  <!--param if="$(arg demo_iros15b)" name="/race_shop2_planner/domain" value="$(find race_shop2_planner)/domains/race_owl_domain_1.lisp" /-->
+
+  <!--Demo 3.2-->
+  <param if="$(arg demo_32a)" name="/race_shop2_planner/domain" value="$(find race_shop2_planner)/domains/race_owl_domain.lisp" />
+
+</launch>
+

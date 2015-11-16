@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Start the race_move_arms server -->
+  <node name="carryarm" pkg="race_move_arms" type="carryarm_server" args="" respawn="true" output="screen" />
+
+</launch>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!--set for integration tests to sebastianr repository-->
+  <arg name="sesame_server" default="http://hitec-race.informatik.uni-hamburg.de:8080/openrdf-sesame/" />
+  <arg name="sesame_repo" default="sebastianr3" />
+
+  <node pkg="race_bb" type="blackboard.py" name="blackboard_node" output="screen">
+    <param name="topics_config" value="$(find race_bringup)/config/bb_topics.yaml" />
+    <param name="sesame_server" value="$(arg sesame_server)" />
+    <param name="sesame_repo" value="$(arg sesame_repo)" />
+  </node>
+
+</launch>

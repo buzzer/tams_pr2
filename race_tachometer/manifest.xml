@@ -1,0 +1,23 @@
+<package>
+  <description brief="race_tachometer">
+
+    race_tachometer calculates a speed and collect global distance, avarage 
+    speed, maximal speed, motion time and global running time of the pr2.
+    The path to the output file can be parametrized via launch file, at the
+    the the frequency is 1 Hz (c++ file, don't forgett to compile afterwards).
+    The data are written back after the program received a SIGINT.
+
+  </description>
+  <author>Denis Klimentjew</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/pr2_speed</url>
+  <depend package="std_msgs"/>
+  <depend package="rospy"/>
+  <depend package="roscpp"/>
+  <depend package="geometry_msgs"/>
+  <depend package="visualization_msgs"/>
+
+</package>
+
+

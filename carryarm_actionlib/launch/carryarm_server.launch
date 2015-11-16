@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Start the carryarm_actionlib server -->
+  <node name="carryarm" pkg="carryarm_actionlib" type="carryarm_server" args="" respawn="true" output="screen" />
+
+</launch>

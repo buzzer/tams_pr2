@@ -1,0 +1,27 @@
+<package>
+  <description brief="race_obstacle_detector">
+
+     race_obstacle_detector provides an action IF to trigger obstacle detection.
+     The input is an coordinate with a bounding box and the output is a Fluent
+     added to the blackboard with coordinate and bounding box and the
+     information blocked by (type). The type can be table or human.
+
+  </description>
+  <author>Sebastian Rockel</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/race_obstacle_detector</url>
+  <depend package="roscpp"/>
+  <depend package="rospy"/>
+  <depend package="tf"/>
+  <depend package="pcl"/>
+  <depend package="pcl_ros"/>
+  <depend package="race_msgs"/>
+  <depend package="actionlib"/>
+  <depend package="geometry_msgs"/>
+  <depend package="pr2_controllers_msgs"/>
+  <!--<depend package="cob_people_detection_msgs"/>-->
+  <depend package="sensor_msgs"/>
+  <depend package="visualization_msgs"/>
+
+</package>

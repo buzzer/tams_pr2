@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="namespace" default=""/>
+
+  <param name="flowers1_description" textfile="$(find race_gazebo_worlds)/models/race_flowers1.model" />
+  <node name="spawn_flowers1" pkg="gazebo" type="spawn_model"
+    args="-gazebo -param flowers1_description -gazebo_namespace $(arg namespace)/gazebo -x -6.97 -y 0.4 -z 0.75 -model race_flowers1" respawn="false" output="screen" />
+
+</launch>

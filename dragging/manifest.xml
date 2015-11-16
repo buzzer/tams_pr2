@@ -1,0 +1,23 @@
+<package>
+  <description brief="dragging">
+
+     dragging provides an action interface in order to drag dish-like objects
+     towards the table edge to grasp it.
+
+  </description>
+  <author>sebastian</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/dragging</url>
+  <depend package="roscpp"/>
+  <depend package="actionlib"/>
+  <depend package="actionlib_msgs"/>
+  <depend package="arm_navigation_msgs"/>
+  <depend package="pr2_controllers_msgs"/>
+  <depend package="tf"/>
+  <depend package="sensor_msgs"/>
+  <depend package="geometry_msgs"/>
+
+</package>
+
+

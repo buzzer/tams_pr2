@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="namespace" default=""/>
+
+  <!--The Tray-->
+  <param name="race_tray_urdf" textfile="$(find race_gazebo_worlds)/urdf/race_tray.urdf" />
+  <node name="spawn_race_tray_model" pkg="gazebo" type="spawn_model" args="-urdf -param race_tray_urdf -model race_tray_1 -x -1.85 -y 1.20 -z 1.00" respawn="false" output="screen" />
+ 
+</launch>

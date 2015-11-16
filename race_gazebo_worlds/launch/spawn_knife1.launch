@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="namespace" default=""/>
+
+  <param name="knife1_description" textfile="$(find race_gazebo_worlds)/models/race_knife1.model" />
+  <node name="spawn_knife1" pkg="gazebo" type="spawn_model"
+    args="-gazebo -param knife1_description -gazebo_namespace $(arg namespace)/gazebo -x -4.78 -y 1.14 -z 0.75 -model race_knife1" respawn="false" output="screen" />
+
+</launch>

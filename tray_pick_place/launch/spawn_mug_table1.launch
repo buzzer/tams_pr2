@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="namespace" default=""/>
+
+  <!--White Coffee Cup Model-->
+  <param name="coffee_cup_model"
+    command="$(find xacro)/xacro.py '$(find race_gazebo_worlds)/urdf/race_coffee_cup.urdf.xacro'" />
+  <!--Coffee mug 1-->
+  <node name="spawn_coffee_cup1" pkg="gazebo" type="spawn_model" args="-urdf -param coffee_cup_model -gazebo_namespace $(arg namespace)/gazebo -x -1.91 -y 1.56 -z 0.75 -Y 1.57 -model coffee_cup1" respawn="false" output="screen" />
+  <!--Coffee mug 2-->
+  <!--<node name="spawn_coffee_cup2" pkg="gazebo" type="spawn_model"-->
+    <!--args="-urdf -param coffee_cup_model -gazebo_namespace $(arg namespace)/gazebo -x -6.91 -y -0.29 -z 0.75 -R 0 -P 0 -Y 0.0 -model coffee_cup2" respawn="false" output="screen" />-->
+  <!--Red Coffee Cup Model-->
+  <!--<param name="coffee_cup_hot_model" command="$(find xacro)/xacro.py '$(find race_gazebo_worlds)/urdf/race_coffee_cup_hot.urdf.xacro'" />-->
+  <!--[>Coffee mug HOT 1<]-->
+  <!--<node name="spawn_coffee_cup_hot1" pkg="gazebo" type="spawn_model" args="-urdf -param coffee_cup_hot_model -x -6.91 -y -0.54 -z 0.76 -R 0 -P 0 -Y -1.4 -model coffee_cup_hot1" respawn="false" output="screen" />-->
+
+</launch>

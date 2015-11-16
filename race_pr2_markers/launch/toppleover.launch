@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="sim" default="true"/>
+
+  <!--One of the following args should be set:-->
+  <arg name="topple_1" default="false"/>
+  <arg name="topple_2" default="false"/>
+  <arg name="topple_3" default="false"/>
+  <arg name="topple_4" default="false"/>
+
+  <!--Start up the Gazebo GUI-->
+  <arg name="gui" default="true"/>
+  <!--Start up RViz and rxplot-->
+  <arg name="viz" default="true"/>
+
+  <!--Environment furniture-->
+  <!--<arg if="$(arg topple_1)" name="furniture" default="true" /> -->
+  <!--<arg if="$(arg topple_2)" name="furniture" default="true" /> -->
+  <!--<arg if="$(arg topple_3)" name="furniture" default="false" />-->
+  <!--<arg if="$(arg topple_4)" name="furniture" default="false" />-->
+  <arg name="furniture" default="true" />
+
+  <!--Serve or clear scenario?-->
+  <arg name="serve" default="false"/>
+  <arg name="clear_12a" default="false"/>
+  <arg name="clear_12b" default="false"/>
+  <arg name="demo_21a" default="false"/>
+  <arg name="demo_21b" default="false"/>
+  <arg name="demo_21c" default="false"/>
+  <arg name="demo_22a" default="false"/>
+  <arg name="demo_22b" default="false"/>
+  <arg name="demo_24a" default="false"/>
+  <arg name="demo_24b" default="false"/>
+  <!--TODO add demo 311 args-->
+
+  <!--Gazebo model on tray-->
+  <arg name="model" default="race_peppermill1"/>
+
+  <!-- start up restaurant world (DAE collada mesh) -->
+  <include if="$(arg sim)" file="$(find race_gazebo_worlds)/launch/race_world.launch">
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="furniture" value="$(arg furniture)" />
+    <arg name="serve" value="$(arg serve)" />
+    <arg name="clear_12a" value="$(arg clear_12a)" />
+    <arg name="clear_12b" value="$(arg clear_12b)" />
+    <arg name="demo_21a" value="$(arg demo_21a)" />
+    <arg name="demo_21b" value="$(arg demo_21b)" />
+    <arg name="demo_21c" value="$(arg demo_21c)" />
+    <arg name="demo_22a" value="$(arg demo_22a)" />
+    <arg name="demo_22b" value="$(arg demo_22b)" />
+    <arg name="demo_24a" value="$(arg demo_24a)" />
+    <arg name="demo_24b" value="$(arg demo_24b)" />
+  </include>
+  
+  <include if="$(arg sim)" file="$(find race_gazebo_worlds)/launch/spawn_pr2.launch">
+   <arg name="demo_24a" value="$(arg demo_24a)"/>                                  
+   <arg name="demo_24b" value="$(arg demo_24b)"/>                                  
+  </include>                                                                        
+
+  <!--Navigation-->
+  <include file="$(find race_navigation)/launch/pr2_nav_tutorial_pr2.launch" />
+
+  <!--Update the robot's AMCL pose hypothesis by querying the simulation ground truth-->
+  <node if="$(arg sim)" pkg="race_simulation_run" type="sim_amcl_update" name="sim_amcl_update" args="race_pr2" respawn="false" output="screen"></node>
+
+  <!--[>Set logger level as on my PC move_base spams the log with warning due to tf delays<]   -->
+  <!--<node name="loglevels_error" pkg="rosservice" type="rosservice"                          -->
+  <!--  args="call /move_base_node/set_logger_level 'ros' 'ERROR'" output="screen"/>           -->
+
+  <!--Visualization of move base parameters-->
+  <node name="speedmarker" pkg="race_pr2_markers" type="speedmarker" args="" output="screen" respawn="true"/>
+  <node name="object_monitor" pkg="race_simulation_run" type="object_monitor" output="screen" respawn="true"
+    args="$(arg model)"/>
+  <node name="object_reset" pkg="race_simulation_run" type="object_reset" output="screen" respawn="false"
+    args="$(arg model)"/>
+
+  <!-- Tug Arms For Navigation -->
+  <node name="tuckarms" pkg="pr2_tuckarm" type="tuck_arms.py" args="b" output="screen" />
+
+  <!-- Move torso up to free the tray -->
+  <node name="move_torso_up" pkg="carryarm_actionlib" type="torso_up" output="screen" />
+
+  <!--Set the realtime to a feasable value (depending on the PC hardware, experience value)-->
+  <node if="$(arg sim)" name="$(anon dynparam)" pkg="dynamic_reconfigure"
+    type="dynparam" args="set /gazebo max_update_rate 300" />
+
+  <!--Unpause the Gazebo simulation-->
+  <!--Do it latest as possible before scenario execution to save CPU cycles an avoid
+  possible race conditions on Gazebo load which cause sporadically to crash it-->
+  <node if="$(arg sim)" name="race_unpause_gazebo_node" pkg="rosservice" type="rosservice"
+    args="call /gazebo/unpause_physics" output="screen"/>
+
+  <group if="$(arg sim)">
+    <!--RViz Plot dynamics values-->
+    <include if="$(arg viz)" file="$(find race_pr2_markers)/launch/viz.launch" />
+  </group>
+
+  <!--Record a rosbag-->
+  <node name="rosbag_pr2_base" pkg="race_pr2_markers" type="record-rosbag.sh" output="screen" />
+  <node name="rosbag_pr2_obj" pkg="race_pr2_markers" type="record-rosbag_obj.sh" output="screen" />
+
+  <node if="$(arg topple_1)" name="topple_1" pkg="race_navigation" type="goals" args="1" output="screen" respawn="true" />
+  <node if="$(arg topple_2)" name="topple_2" pkg="race_navigation" type="goals" args="" output="screen" respawn="true" />
+  <node if="$(arg topple_3)" name="topple_3" pkg="topple_scenarios" type="onegoal" args="" output="screen" respawn="false" />
+  <node if="$(arg topple_4)" name="topple_4" pkg="topple_scenarios" type="cmd_goals" args="" output="screen" respawn="false" />
+
+</launch>

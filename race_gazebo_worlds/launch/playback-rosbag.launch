@@ -1,0 +1,11 @@
+<launch>
+  <!-- Creates a command line argument called file -->
+  <arg name="file"/>
+
+  <!-- Loads the robot description of PR2 so rviz can visualize it -->
+  <!--<param name="robot_description" command="$(find xacro)/xacro.py '$(find pr2_description)/robots/pr2.urdf.xacro'" />-->
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find race_pr2_description)/robots/race_pr2.urdf.xacro'" />
+
+  <!-- Run the rosbag play as a node with the file argument -->
+  <node name="rosbag" pkg="rosbag" type="play" args="--loop $(arg file)" output="screen"/>
+</launch>

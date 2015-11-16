@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- This launch file starts navigation, manipulation et cetera - stuff that
+       doesn't depend on the blackboard. It is assumed that the basic PR2
+       software (real or Gazebo) is running. -->
+
+  <include file="$(find pr2_machine)/$(env ROBOT).machine" />
+
+  <!-- set stereo to true for narrow stereo, false for kinect -->
+  <arg name="stereo" default="false" />
+
+  <!-- use sim if you're in simulation and don't want to run openni_node -->
+  <arg name="sim" default="true" />
+
+  <include file="$(find race_navigation)/launch/pr2_nav_tutorial_pr2.launch" >
+    <arg name="sim" value="$(arg sim)" />
+  </include>
+
+  <!-- Update the robot's AMCL pose hypothesis by querying the simulation
+       ground truth. Has to be started here, because we only want this update
+       to happen once whenever we start AMCL. -->
+  <node if="$(arg sim)" pkg="race_simulation_run" type="sim_amcl_update" name="sim_amcl_update" args="race_pr2" respawn="false" output="screen" />
+
+  <!--<include file="$(find pr2_tabletop_manipulation_launch)/launch/pr2_tabletop_manipulation.launch">-->
+  <include file="$(find race_tabletop_object_publisher)/launch/race_pr2_tabletop_manipulation.launch">
+    <arg name="sim" value="$(arg sim)" />
+    <arg name="stereo" value="$(arg stereo)" />
+    <!--Hack: to prevent errounous object recognition from simple grasping objects bounding boxes-->
+    <!--  <arg if="$(arg demo_22a)" name="household_config" value="$(find household_objects_database)/config/wgs36.yaml"/> -->
+  </include>
+
+  <!--node pkg="robot_motion_param" type="set_motion_param.py" name="set_motion_param" args="" respawn="true" output="screen" /-->
+
+  <!--Start the PR2 SpeedMarker-->
+  <node machine="c2" name="race_pr2_speedmarker" pkg="race_pr2_markers" type="speedmarker" output="screen" />
+
+  <!--Start the tray laser node-->
+  <!--node name = "race_tray_monitor" pkg = "race_tray_monitor" type = "race_tray_monitor"/-->
+
+</launch>

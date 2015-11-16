@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!--Start up the Gazebo GUI-->
+  <arg name="gui" default="true"/>
+  <!--Environment furniture-->
+  <arg name="furniture" default="true" />
+
+  <!--Serve or clear scenario?-->
+  <arg name="serve" default="false"/>
+  <arg name="clear_12a" default="false"/>
+  <arg name="clear_12b" default="false"/>
+  <arg name="demo_21a" default="false"/>
+  <arg name="demo_21b" default="false"/>
+  <arg name="demo_21c" default="false"/>
+  <arg name="demo_22a" default="false"/>
+  <arg name="demo_22b" default="false"/>
+  <arg name="demo_24a" default="false"/>
+  <arg name="demo_24b" default="false"/>
+  <arg name="oru_ecai" default="false"/>
+  <arg name="demo_311a" default="false"/>
+  <arg name="demo_311b" default="false"/>
+  <arg name="demo_iros15b" default="false"/> <!-- IROS 2015 replanning -->
+  <arg name="demo_312a" default="false"/>
+  <arg name="demo_32a" default="false"/>
+  <arg name="demo_32c" default="false"/>
+
+  <node name="race_world_pr2" pkg="race_simulation_run" type="race_world_pr2" output="screen" respawn="false"
+    args="
+    gui=$(arg gui)
+    furniture=$(arg furniture)
+    serve=$(arg serve)
+    clear_12a=$(arg clear_12a)
+    clear_12b=$(arg clear_12b)
+    demo_21a=$(arg demo_21a)
+    demo_21b=$(arg demo_21b)
+    demo_21c=$(arg demo_21c)
+    demo_22a=$(arg demo_22a)
+    demo_22b=$(arg demo_22b)
+    demo_24a=$(arg demo_24a)
+    demo_24b=$(arg demo_24b)
+    oru_ecai=$(arg oru_ecai)
+    demo_311a=$(arg demo_311a)
+    demo_311b=$(arg demo_311b)
+    demo_iros15b=$(arg demo_iros15b)
+    demo_312a=$(arg demo_312a)
+    demo_32a=$(arg demo_32a)
+    demo_32c=$(arg demo_32c)
+    "/>
+
+</launch>

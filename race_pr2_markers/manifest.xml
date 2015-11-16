@@ -1,0 +1,21 @@
+<package>
+  <description brief="race_pr2_markers">
+
+     race_pr2_markers provides current position, orientation and velocity information of the PR2.
+
+  </description>
+  <author>Sebastian Rockel</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/using_markers</url>
+  <depend package="roscpp"/>
+  <depend package="visualization_msgs"/>
+  <depend package="geometry_msgs"/>
+  <depend package="tf"/>
+  <depend package="std_msgs"/>
+  <depend package="race_navigation"/>
+  <!--<depend package="topple_scenarios"/>-->
+
+</package>
+
+

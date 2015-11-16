@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+
+  <param name="peppermill_description" textfile="$(find race_gazebo_worlds)/models/race_peppermill1.model" />
+  <node name="spawn_peppermill" pkg="gazebo" type="spawn_model" args="-gazebo
+    -param peppermill_description -x -6.81 -y -0.04
+    -z 0.75 -model race_peppermill1d" respawn="false" output="screen" />
+
+</launch>

@@ -1,0 +1,23 @@
+<package>
+  <description brief="race_table_detector">
+
+     race_table_detector detects a table (plane) and provides the beginning of
+     the table plane (from the robot's perspective) as coordinate, thus the
+     robot can move close to it.
+
+  </description>
+  <author>Sebastian Rockel</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/pr2_pick_and_place_tutorial</url>
+  <depend package="actionlib"/>
+  <depend package="object_manipulation_msgs"/>
+  <depend package="tabletop_object_detector"/>
+  <depend package="tabletop_collision_map_processing"/>
+  <depend package="roscpp"/>
+  <depend package="visualization_msgs"/>
+  <depend package="tf"/>
+
+</package>
+
+

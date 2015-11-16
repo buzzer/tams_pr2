@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!--Start up a dedicated scenario-->
+  <arg name="demo_11a" default="false"/>
+  <arg name="demo_11b" default="false"/>
+  <arg name="demo_11c" default="false"/>
+  <arg name="demo_12a" default="false"/>
+  <arg name="demo_12b" default="false"/>
+  <arg name="demo_21a" default="false"/>
+  <arg name="demo_21b" default="false"/>
+  <arg name="demo_21c" default="false"/>
+  <arg name="demo_22a" default="false"/>
+  <arg name="demo_22b" default="false"/>
+  <arg name="demo_24a" default="false"/>
+  <arg name="demo_24b" default="false"/>
+  <arg name="serve_clear" default="false"/>
+  <arg name="oru_demo" default="false"/>
+  <arg name="oru_ecai" default="false"/>
+  <arg name="demo_311a" default="false"/>
+  <arg name="demo_311b" default="false"/>
+  <arg name="demo_iros15b" default="false"/> <!-- IROS 2015 replanning -->
+  <arg name="demo_312a" default="false"/>
+  <arg name="demo_32a" default="false"/>
+  <arg name="demo_32c" default="false"/>
+
+
+  <!--Static knowledge-->
+  <include file="$(find race_bringup)/launch/load_static_knowledge_scenario.launch">
+    <arg name="demo_11_a" value="$(arg demo_11a)" />
+    <arg name="demo_11_b" value="$(arg demo_11b)" />
+    <arg name="demo_11_c" value="$(arg demo_11c)" />
+    <arg name="demo_12_a" value="$(arg demo_12a)" />
+    <arg name="demo_12_b" value="$(arg demo_12b)" />
+    <arg name="demo_21_a" value="$(arg demo_21a)" />
+    <arg name="demo_21_b" value="$(arg demo_21b)" />
+    <arg name="demo_21_c" value="$(arg demo_21c)" />
+    <arg name="demo_22_a" value="$(arg demo_22a)" />
+    <arg name="demo_22_b" value="$(arg demo_22b)" />
+    <arg name="demo_24_a" value="$(arg demo_24a)" />
+    <arg name="demo_24_b" value="$(arg demo_24b)" />
+    <arg name="serve_clear" value="$(arg serve_clear)" />
+    <arg name="oru_demo" value="$(arg oru_demo)" />
+    <arg name="oru_ecai" value="$(arg oru_ecai)" />
+    <arg name="demo_311a" value="$(arg demo_311a)"/>
+    <arg name="demo_311b" value="$(arg demo_311b)"/>
+    <arg name="demo_iros15b" value="$(arg demo_iros15b)"/>
+    <arg name="demo_312a" value="$(arg demo_312a)"/>
+    <arg name="demo_32a"  value="$(arg demo_32a)"/>
+    <arg name="demo_32c"  value="$(arg demo_32c)"/>
+  </include>
+
+  <!--Set the domain file-->
+  <include file="$(find race_bringup)/launch/set_domain.launch">
+    <arg name="demo_11a" value="$(arg demo_11a)" />
+    <arg name="demo_11b" value="$(arg demo_11b)" />
+    <arg name="demo_11c" value="$(arg demo_11c)" />
+    <arg name="demo_12a" value="$(arg demo_12a)" />
+    <arg name="demo_12b" value="$(arg demo_12b)" />
+    <arg name="demo_21a" value="$(arg demo_21a)" />
+    <arg name="demo_21b" value="$(arg demo_21b)" />
+    <arg name="demo_21c" value="$(arg demo_21c)" />
+    <arg name="demo_22a" value="$(arg demo_22a)" />
+    <arg name="demo_22b" value="$(arg demo_22b)" />
+    <arg name="demo_24a" value="$(arg demo_24a)" />
+    <arg name="demo_24b" value="$(arg demo_24b)" />
+    <arg name="serve_clear" value="$(arg serve_clear)" />
+    <arg name="oru_demo" value="$(arg oru_demo)" />
+    <arg name="oru_ecai" value="$(arg oru_ecai)" />
+    <arg name="demo_311a" value="$(arg demo_311a)"/>
+    <arg name="demo_311b" value="$(arg demo_311b)"/>
+    <arg name="demo_iros15b" value="$(arg demo_iros15b)"/>
+    <arg name="demo_312a" value="$(arg demo_312a)"/>
+    <arg name="demo_32a"  value="$(arg demo_32a)"/>
+  </include>
+
+  <!--CLI-->
+  <node name="race_cli_node1" pkg="race_cli" type="race_cli.py" respawn="false" output="screen" />
+</launch>

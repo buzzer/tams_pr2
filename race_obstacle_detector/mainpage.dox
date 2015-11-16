@@ -1,0 +1,16 @@
+/**
+\mainpage
+\htmlinclude manifest.html
+
+\b race_obstacle_detector 
+
+race_obstacle_detector provides an action IF to trigger obstacle detection.
+The input is an coordinate with a bounding box and the output is a Fluent
+added to the blackboard with coordinate and bounding box and the
+information blocked by (type). The type can be table or human.
+
+
+-->
+
+
+*/

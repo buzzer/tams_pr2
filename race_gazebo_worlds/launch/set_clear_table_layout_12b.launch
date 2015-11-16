@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="namespace" default=""/>
+
+  <node name="set_clear_table_layout_node1" pkg="rostopic" type="rostopic"
+    args="pub $(arg namespace)/gazebo/set_model_state gazebo/ModelState '{model_name:
+    coffee_cup1, pose: { position: { x: -4.8, y: 1.42, z: 0.75 }, orientation:
+    {x: 0, y: 0, z: 0, w: 1 } }, twist: { linear: { x: 0, y: 0, z: 0 }, angular:
+    { x: 0, y: 0, z: 0}  }, reference_frame: world }'" output="screen"/>
+
+  <node name="set_clear_table_layout_node2" pkg="rostopic" type="rostopic"
+    args="pub $(arg namespace)/gazebo/set_model_state gazebo/ModelState '{model_name:
+    coffee_cup2, pose: { position: { x: -4.39, y: 1.08, z: 0.75 }, orientation:
+    {x: 0, y: 0, z: 0, w: 1 } }, twist: { linear: { x: 0, y: 0, z: 0 }, angular:
+    { x: 0, y: 0, z: 0}  }, reference_frame: world }'" output="screen"/>
+
+</launch>

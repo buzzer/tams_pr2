@@ -1,0 +1,13 @@
+/**
+\mainpage
+\htmlinclude manifest.html
+
+\b race_pr2_description 
+
+     race_pr2_description contains the RACE specific parts in addition to or as
+     replacement to the standard ROS pr2_description package.
+
+-->
+
+
+*/

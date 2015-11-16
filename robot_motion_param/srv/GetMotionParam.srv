@@ -1,0 +1,5 @@
+# Service definition
+---
+float32 max_vel  # velocity 0..0.55
+float32 max_acc  # acceleration 0..
+float32 max_jerk # jerk 0..

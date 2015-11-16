@@ -1,0 +1,40 @@
+<launch>
+
+  <arg name="sim" default="true"/>
+
+  <arg name="demo_24" default="false"/>
+
+  <!-- machine tags for sim and pr2, be sure to set environment variable ROBOT to correct setting -->
+  <include file="$(find pr2_machine)/$(env ROBOT).machine" />
+
+  <include unless="$(arg demo_24)" file="$(find race_navigation)/config/amcl_node.xml" />
+  <include if="$(arg demo_24)" file="$(find race_navigation)/config/amcl_node_demo24.xml" />
+
+  <include file="$(find pr2_navigation_teleop)/teleop.xml" />
+
+  <include file="$(find pr2_navigation_perception)/lasers_and_filters.xml" />
+  <param name="/tilt_shadow_filter/incident_angle_correction" value="false" />  <!-- see http://answers.ros.org/question/37126/pr2-sees-ghost-obstacles-in-tilting-laser/ -->
+
+  <include file="$(find pr2_navigation_perception)/ground_plane.xml" />
+  <param name="/sac_ground_removal/sac_distance_threshold" value="0.10" /> 
+
+  <!-- The navigation stack and associated parameters -->
+  <include file="$(find pr2_navigation_global)/move_base.xml" />
+
+  <node name="map_server" pkg="map_server" type="map_server"
+    args="$(find race_navigation)/config/map_$(env ROBOT).pgm 0.05" 
+    respawn="true" />
+
+  <!--Set logger level as on my PC move_base spams the log with warning due to tf delays-->
+  <node if="$(arg sim)" name="loglevels_error" pkg="rosservice" type="rosservice"
+    args="call /move_base_node/set_logger_level 'ros' 'ERROR'" output="screen"/>
+
+  <!--Getting/setting services for motion parameters-->
+  <node machine="c2" name="get_motion_param" pkg="robot_motion_param" type="get_motion_param.py" respawn="true" />
+  <node machine="c2" name="set_motion_param" pkg="robot_motion_param" type="set_motion_param.py" respawn="true" />
+
+  <!--publish static transform for Gazebo frame-->
+   <node pkg="tf" type="static_transform_publisher" name="tf_map2gazebo_link"
+     args="12.28 10.20 0 0 0 0 /map /gazebo_link 200"/> 
+   <!--last arg in milliseconds-->
+</launch>

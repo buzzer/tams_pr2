@@ -1,0 +1,49 @@
+
+========================================= launch the scenario
+cd ros
+
+source setup.bash
+
+cd ros/race
+
+export ROBOT=sim
+
+roslaunch topple_scenarios learn_topple.launch
+
+
+roslaunch race_gazebo_worlds race_world_pr2.launch
+
+
+roslaunch race_gazebo_worlds spawn_flowers_mug_pr2_tray.launch
+
+roslaunch race_gazebo_worlds spawn_flowers_mug_oilserver_pr2_tray.launch
+
+=========================================
+
+cd ros/race_tray_laser
+
+rosmake race_tray_laser
+
+rosrun race_tray_laser race_tray_laser 
+
+---------------check original topic
+
+rostopic echo /tray_scan
+
+------------transformLaserScanToPointCloud---
+------------uses tf to transform laser scan into a point cloud in another frame
+
+rostopic echo /tray_laser_cloud
+
+
+
+
+==========results
+
+zhlw@ubuntu:~/race_tray_laser$ rosrun race_tray_laser race_tray_laser 
+Segmentation fault (core dumped)
+
+
+
+zhlw@ubuntu:~/ros$ roscd topple_scenarios
+zhlw@ubuntu:~/ros/race/race_simulation/topple_scenarios$ 

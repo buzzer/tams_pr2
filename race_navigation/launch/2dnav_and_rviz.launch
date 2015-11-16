@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<launch>
+  <!-- nav-stack -->
+  <!-- <include file="$(find pr2_2dnav_gazebo)/2dnav-stack-amcl.launch"/> -->
+  <include file="$(find race_navigation)/launch/pr2_nav_tutorial_pr2.launch" />
+
+  <!-- for visualization -->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find race_gazebo_worlds)/rviz/race_gazebo_worlds.vcg" />
+</launch>
+

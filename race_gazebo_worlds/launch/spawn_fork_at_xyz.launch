@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+
+ <arg name="x" default="-4.77"/>
+ <arg name="y" default="1.52"/>
+ <arg name="z" default="0.75"/>
+ <arg name="namespace" default=""/>
+
+  <param name="fork1_description" textfile="$(find race_gazebo_worlds)/models/race_fork1.model" />
+  <node name="spawn_fork1" pkg="gazebo" type="spawn_model"
+    args="-gazebo -param fork1_description -gazebo_namespace $(arg namespace)/gazebo -x $(arg x) -y $(arg y) -z $(arg z) -model race_fork1" respawn="false" output="screen" />
+
+</launch>

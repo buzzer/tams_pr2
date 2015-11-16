@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- <include file="$(find race_gazebo_worlds)/launch/spawn_book1.launch" /> -->
+    <include file="$(find race_gazebo_worlds)/launch/spawn_book_c.launch" />
+    <include file="$(find race_gazebo_worlds)/launch/spawn_spoon1.launch" />
+    <include file="$(find race_gazebo_worlds)/launch/spawn_bowl.launch" />
+    <include file="$(find race_gazebo_worlds)/launch/spawn_flowers1.launch" />
+    <include file="$(find race_gazebo_worlds)/launch/spawn_fork1.launch" />
+    <include file="$(find race_gazebo_worlds)/launch/spawn_knife1.launch" />
+    <include file="$(find race_gazebo_worlds)/launch/spawn_mobile1.launch" />
+    <include file="$(find race_gazebo_worlds)/launch/spawn_oilservers1.launch" />
+
+</launch>

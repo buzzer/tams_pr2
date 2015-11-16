@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!--Start up the Gazebo GUI-->
+  <arg name="gui" default="true"/>
+  <!--Environment furniture-->
+  <arg name="furniture" default="true" />
+
+  <!--Serve or clear scenario?-->
+  <arg name="serve" default="false"/>
+  <arg name="clear_12a" default="false"/>
+  <arg name="clear_12b" default="false"/>
+  <arg name="demo_21a" default="false"/>
+  <arg name="demo_21b" default="false"/>
+  <arg name="demo_21c" default="false"/>
+  <arg name="demo_22a" default="false"/>
+  <arg name="demo_22b" default="false"/>
+  <arg name="demo_24a" default="false"/>
+  <arg name="demo_24b" default="false"/>
+  <arg name="oru_ecai" default="false"/>
+
+  <!-- start up restaurant world (DAE collada mesh) -->
+  <include file="$(find race_gazebo_worlds)/launch/race_world.launch">
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="furniture" value="$(arg furniture)" />
+    <arg name="serve" value="$(arg serve)" />
+    <arg name="clear_12a" value="$(arg clear_12a)" />
+    <arg name="clear_12b" value="$(arg clear_12b)" />
+    <arg name="demo_21a" value="$(arg demo_21a)" />
+    <arg name="demo_21b" value="$(arg demo_21b)" />
+    <arg name="demo_21c" value="$(arg demo_21c)" />
+    <arg name="demo_22a" value="$(arg demo_22a)" />
+    <arg name="demo_22b" value="$(arg demo_22b)" />
+    <arg name="demo_24a" value="$(arg demo_24a)" />
+    <arg name="demo_24b" value="$(arg demo_24b)" />
+    <arg name="oru_ecai" value="$(arg oru_ecai)" />
+  </include>
+  
+  <include file="$(find race_gazebo_worlds)/launch/spawn_pr2.launch">
+    <arg name="serve" value="$(arg serve)" />
+    <arg name="clear_12a" value="$(arg clear_12a)" />
+    <arg name="clear_12b" value="$(arg clear_12b)" />
+    <arg name="demo_21a" value="$(arg demo_21a)" />
+    <arg name="demo_21b" value="$(arg demo_21b)" />
+    <arg name="demo_21c" value="$(arg demo_21c)" />
+    <arg name="demo_22a" value="$(arg demo_22a)" />
+    <arg name="demo_22b" value="$(arg demo_22b)" />
+    <arg name="demo_24a" value="$(arg demo_24a)" />
+    <arg name="demo_24b" value="$(arg demo_24b)" />
+    <arg name="oru_ecai" value="$(arg oru_ecai)" />
+  </include>
+
+  <!--Set the realtime to a feasable value-->
+  <node name="$(anon dynparam)" pkg="dynamic_reconfigure"
+    type="dynparam" args="set /gazebo max_update_rate 1000" />
+
+  <!-- Launch the tachometer (only in simulation, since it's already running by default on Trixi)  -->
+  <include file="$(find race_tachometer)/launch/pr2_tachometer.launch"/>
+
+  <!--Unpause the Gazebo simulation-->
+  <node name="race_unpause_gazebo_node" pkg="rosservice" type="rosservice" args="call /gazebo/unpause_physics" output="screen"/>
+</launch>

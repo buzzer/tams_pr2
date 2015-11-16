@@ -1,0 +1,14 @@
+# goal definition
+race_msgs/BoundingBox boundingbox
+---
+#result definition
+#obstacle can be true (obstacle found) or false (no obstacle)
+bool obstacle
+# type can be 'table' or 'human'
+string obstacle_type
+# the bounding box of the obstacle
+race_msgs/BoundingBox boundingbox
+float32 confidence
+---
+#feedback
+#int32[] sequence

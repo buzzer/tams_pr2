@@ -1,0 +1,39 @@
+#goal definition
+
+# whether to pick from tray or place on tray, and whether to use a side or a top grasp
+int8 action
+int8 PICK_SIDE = 1   # 1 - pick up from the side
+int8 PICK_TOP = 2    # 2 - pick up from the top
+int8 PLACE = 3       # 3 - place object on the tray. the place pose is determined by the robot automatically unless use_place_pose == True.
+int8 PLACE_SIDE = 4  # 4 - place object on the tray (from the side)
+int8 PLACE_TOP = 5   # 5 - place object on the tray (from the top)
+
+# which arm to use [RIGHT_ARM | LEFT_ARM]
+int8 arm
+int8 RIGHT_ARM = 0
+int8 LEFT_ARM = 1
+
+# which slot on the tray to use for this pick / place [RIGHT_SLOT | MIDDLE_SLOT | LEFT_SLOT]
+int8 slot
+int8 RIGHT_SLOT = 0
+int8 MIDDLE_SLOT = 1
+int8 LEFT_SLOT = 2
+
+# on "place on tray": filled with the information of bounding box of objects
+# on "pick from tray": ignored; instead, the bbox_dims from the previous place are used
+geometry_msgs/Vector3 bbox_dims
+
+# is the following place_pose valid? if yes, it will be used; otherwise the robot will determine it automatically
+bool use_place_pose
+
+# on "place on tray": where the end-effector ("r/l_wrist_roll_link") should be to place the object upright on the MIDDLE_SLOT, for the grasp used when picking up the object. The pose is given in the frame "/base_tray_laser_link".
+# on "pick from tray": ignored
+geometry_msgs/PoseStamped place_pose
+
+---
+# if the grasping has failed, return FAILED_GRASP; otherwise, return SUCCESS_GRASP
+int8 FAILED_GRASP = 0
+int8 SUCCESS_GRASP = 1
+int8 result
+---
+#feedback

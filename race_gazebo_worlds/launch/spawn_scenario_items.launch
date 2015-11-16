@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!--Environment furniture-->
+  <arg name="furniture" default="true" />
+  <!--Serve or clear scenario?-->
+  <arg name="serve" default="false"/>
+  <arg name="clear_12a" default="false"/>
+  <arg name="clear_12b" default="false"/>
+  <arg name="demo_11a" default="false"/>
+  <arg name="demo_11b" default="false"/>
+  <arg name="demo_11c" default="false"/>
+  <arg name="demo_12a" default="false"/>
+  <arg name="demo_12b" default="false"/>
+  <arg name="demo_21a" default="false"/>
+  <arg name="demo_21b" default="false"/>
+  <arg name="demo_21c" default="false"/>
+  <arg name="demo_22a" default="false"/>
+  <arg name="demo_22b" default="false"/>
+  <arg name="demo_23a" default="false"/>
+  <arg name="demo_24a" default="false"/>
+  <arg name="demo_24b" default="false"/>
+  <arg name="oru_ecai" default="false"/>
+  <arg name="demo_311a" default="false"/>
+  <arg name="demo_311b" default="false"/>
+  <arg name="demo_iros15b" default="false"/> <!-- IROS 2015 replanning -->
+  <arg name="demo_312a" default="false"/>
+  <arg name="demo_32a" default="false"/>
+  <arg name="demo_32c" default="false"/>
+
+  <!--Environment furniture-->
+  <group if="$(arg furniture)">
+    <include file="$(find race_gazebo_worlds)/launch/spawn_race_models.launch">
+      <arg if="$(arg demo_24a)" name="chair1" value="false" />
+      <arg if="$(arg demo_24b)" name="chair1" value="false" />
+      <arg if="$(arg demo_24a)" name="chair4" value="false" />
+      <arg if="$(arg demo_24b)" name="chair4" value="false" />
+      <arg if="$(arg demo_32a)" name="chair4" value="false" />
+      <arg if="$(arg demo_32c)" name="chair4" value="false" />
+    </include>
+  </group>
+
+  <!-- Move the mugs to their positions -->
+  <!--Serve scenario 11_*-->
+  <include if="$(arg serve)"    file="$(find race_gazebo_worlds)/launch/spawn_mugs_serve.launch"/>
+  <include if="$(arg demo_11a)" file="$(find race_gazebo_worlds)/launch/spawn_mugs_serve.launch"/>
+  <include if="$(arg demo_11b)" file="$(find race_gazebo_worlds)/launch/spawn_mugs_serve.launch"/>
+  <include if="$(arg demo_11c)" file="$(find race_gazebo_worlds)/launch/spawn_mugs_serve.launch"/>
+  <!--Clear scenario 12_a-->
+  <include if="$(arg clear_12a)" file="$(find race_gazebo_worlds)/launch/spawn_mugs_clear_12a.launch"/>
+  <include if="$(arg demo_12a)" file="$(find race_gazebo_worlds)/launch/spawn_mugs_clear_12a.launch"/>
+  <!--Clear scenario 12_b-->
+  <include if="$(arg demo_12b)" file="$(find race_gazebo_worlds)/launch/spawn_mugs_clear_12b.launch"/>
+  <include if="$(arg clear_12b)" file="$(find race_gazebo_worlds)/launch/spawn_mugs_clear_12b.launch"/>
+
+  <!--Serve scenario 21_a-->
+  <group if="$(arg demo_21a)">
+    <include unless="$(arg serve)" file="$(find race_gazebo_worlds)/launch/spawn_mugs_serve.launch"/>
+    <include file="$(find race_gazebo_worlds)/launch/spawn_human_south.launch"/>
+  </group>
+  <!--Serve scenario 21_b-->
+  <group if="$(arg demo_21b)">
+    <include unless="$(arg serve)" file="$(find race_gazebo_worlds)/launch/spawn_mugs_serve.launch"/>
+    <include file="$(find race_gazebo_worlds)/launch/spawn_table_ext1_south.launch"/>
+  </group>
+  <!--Serve scenario 21_c-->
+  <group if="$(arg demo_21c)">
+    <include unless="$(arg serve)" file="$(find race_gazebo_worlds)/launch/spawn_mugs_serve.launch"/>
+    <include file="$(find race_gazebo_worlds)/launch/spawn_human_north.launch"/>
+    <include file="$(find race_gazebo_worlds)/launch/spawn_table_ext1_south.launch"/>
+  </group>
+  <!--Clear scenario 22_a-->
+  <include if="$(arg demo_22a)" file="$(find race_gazebo_worlds)/launch/spawn_mobile_and_mug.launch"/>
+  <!--Clear scenario 22_b-->
+  <include if="$(arg demo_22b)" file="$(find race_gazebo_worlds)/launch/spawn_race_tabletop_objects.launch"/>
+  <!--well set table scenario 23_a-->
+  <include if="$(arg demo_23a)" file="$(find race_gazebo_worlds)/launch/spawn_hybrid_scenario.launch"/>
+
+  <!--Object and Scene Learning scenario 24_a Added by Miguel-->
+  <include if="$(arg demo_24a)" file="$(find race_gazebo_worlds)/launch/spawn_basic_meal_layout_table1.launch"/>
+
+  <!--Object and Scene Learning scenario 24_b Added by Miguel-->
+  <include if="$(arg demo_24b)" file="$(find race_gazebo_worlds)/launch/spawn_basic_meal_layout_table2.launch"/>
+
+  <!--spawn peppermill on counter for demo_311a-->
+  <include if="$(arg demo_311a)" file="$(find race_gazebo_worlds)/launch/spawn_peppermill_counter.launch"/>
+
+  <!--spawn peppermill and mug on counter for demo_311b-->
+  <include if="$(arg demo_311b)" file="$(find race_gazebo_worlds)/launch/spawn_peppermill_mug.launch"/>
+
+  <!--spawn peppermill and mug on counter for demo_iros15b-->
+  <include if="$(arg demo_iros15b)" file="$(find race_gazebo_worlds)/launch/spawn_peppermill_counter.launch"/>
+  
+  <!--spawn objects for demo_32a-->
+  <include if="$(arg demo_32a)" file="$(find race_gazebo_worlds)/launch/spawn_d32_tabletop_objects.launch"/>
+
+  <!--spawn objects for demo_32c-->
+  <include if="$(arg demo_32c)" file="$(find race_gazebo_worlds)/launch/spawn_d32c_objects.launch"/>
+
+  <!-- oru ecai added by stefan-->
+  <group if="$(arg oru_ecai)">
+    <include unless="$(arg serve)" file="$(find race_gazebo_worlds)/launch/spawn_mugs_serve.launch"/>
+    <include file="$(find race_gazebo_worlds)/launch/spawn_human_ecai_rigth.launch"/>
+    <!--include file="$(find race_gazebo_worlds)/launch/spawn_human_ecai_left.launch"/-->
+    <!--node name="spawn_chair5" pkg="gazebo" type="spawn_model" args="-gazebo -param chair_description -gazebo_namespace $(arg namespace)/gazebo x -5.00 -y 0.58  -Y 1.57 -model race_chair1" respawn="false" output="screen" /-->  
+  </group>
+
+</launch>
+

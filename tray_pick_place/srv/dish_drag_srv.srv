@@ -1,0 +1,6 @@
+# the massages for the informations to drag a dish. 
+string object    # name of the object
+---
+geometry_msgs/Point pos      # centre position of the dish
+float32 radius      #  redius of the dish
+geometry_msgs/Vector3 distance       # distance to drag

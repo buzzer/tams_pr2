@@ -1,0 +1,18 @@
+# goal definition
+race_msgs/BoundingBox boundingbox
+duration timeout # action will return latest after this duration
+# if duration will be '0' the action will wait infinitely or unless the obstacle
+# has disappeard
+---
+#result definition
+# kept empty as this action finishes only when obstacle has disappear.
+# In the case a timeout occured the caller should check the feedback for the
+# most recent status
+---
+#feedback definition
+bool obstacle
+# type can be 'table' or 'human' or 'unknown' if any
+string obstacle_type
+# the bounding box of the obstacle if any
+race_msgs/BoundingBox boundingbox
+float32 confidence

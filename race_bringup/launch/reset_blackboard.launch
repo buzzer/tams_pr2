@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Launch the RaCE nodes -->
+
+  <!-- Launch the blackboard -->
+  <!--<node name="blackboard_node" pkg="race_bb" type="blackboard.py"/>-->
+
+<node name="reset_blackboard_node1" pkg="rosservice" type="rosservice" args="call /blackboard/reset_repository" output="screen"/>
+
+  <!-- Launch the RaCE nodes ends -->
+
+  <!-- Launch the world-->
+  <!--<include file="$(find race_gazebo_worlds)/launch/pr2_tams_rest_3d.launch" />-->
+
+
+</launch>

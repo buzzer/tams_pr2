@@ -1,0 +1,21 @@
+#goal definition
+
+#supported arm positions:
+# 0 - none
+# 1 - carrypose
+# 2 - carrypose considering other arm (preventing potential collisions)
+# 3 - above pose (similar to the pick and place manager equivalent)
+# 4 - side pose
+int32 carrypose # set to pose requested
+
+#supported arms:
+# 0 - right arm
+# 1 - left arm
+# 2 - both arms
+int32 carryarm # which arm to use
+---
+#result definition
+int32 result
+---
+#feedback
+#int32 feedback

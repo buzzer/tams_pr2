@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<launch>
+
+  <node name="set_pr2_counter1_node1" pkg="rostopic" type="rostopic"
+    args="pub /gazebo/set_model_state gazebo/ModelState '{model_name:
+    race_pr2, pose: { position: { x: -6.3785, y: -0.0926, z: -0.0055 }, orientation:
+    {x: 0, y: 0, z: 1, w: 0 } }, twist: { linear: { x: 0, y: 0, z: 0 }, angular:
+    { x: 0, y: 0, z: 0}  }, reference_frame: world }'" output="screen"/>
+
+</launch>
+<!-- data from gazebo>
+pose: 
+  position: 
+    x: -6.37847958084
+    y: -0.0925868379036
+    z: -0.00551853218712
+  orientation: 
+    x: 8.13300349094e-05
+    y: 2.50197730495e-06
+    z: 0.999999992418
+    w: -9.24340468915e-05
+twist: 
+  linear: 
+    x: 0.000195490195021
+    y: 0.000166103875554
+    z: -0.00045257263566
+  angular: 
+    x: 0.001149357344
+    y: -0.000363107141071
+    z: -0.000511304405541
+success: True
+<data from gazebo-->

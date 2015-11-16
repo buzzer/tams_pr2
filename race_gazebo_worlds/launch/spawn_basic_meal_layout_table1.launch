@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!--SPAWN BOWL-->
+    <include file="$(find race_gazebo_worlds)/launch/spawn_object_at_xyz.launch">
+        <arg name="model" value="race_bowl"/>
+        <arg name="x" value="-4.78" />
+        <arg name="y" value="1.35" />
+        <arg name="z" value="0.75" />
+        <arg name="roll" value="0"/>
+        <arg name="pitch" value="0"/>
+        <arg name="yaw" value="1.65"/>
+    </include>
+
+    <!--SPAWN FORK-->
+    <include file="$(find race_gazebo_worlds)/launch/spawn_object_at_xyz.launch">
+        <arg name="model" value="race_fork1"/>
+        <arg name="x" value="-4.78"/>
+        <arg name="y" value="1.55"/>
+        <arg name="z" value="0.75"/>
+        <arg name="roll" value="0"/>
+        <arg name="pitch" value="0"/>
+        <arg name="yaw" value="0"/>
+    </include>
+
+    <!--SPAWN KNIFE-->
+    <include file="$(find race_gazebo_worlds)/launch/spawn_object_at_xyz.launch">
+        <arg name="model" value="race_knife1"/>
+        <arg name="x" value="-4.78"/>
+        <arg name="y" value="1.15"/>
+        <arg name="z" value="0.75"/>
+        <arg name="roll" value="0"/>
+        <arg name="pitch" value="0"/>
+        <arg name="yaw" value="0"/>
+    </include>
+
+    <!--SPAWN SPOON-->
+    <include file="$(find race_gazebo_worlds)/launch/spawn_object_at_xyz.launch">
+        <arg name="model" value="race_spoon1"/>
+        <arg name="x" value="-4.78"/>
+        <arg name="y" value="1.050"/>
+        <arg name="z" value="0.75"/>
+        <arg name="roll" value="0"/>
+        <arg name="pitch" value="0"/>
+        <arg name="yaw" value="0"/>
+    </include>
+
+    <!--SPAWN MUG-->
+    <include file="$(find race_gazebo_worlds)/launch/spawn_object_at_xyz.launch">
+        <arg name="urdf" value="true"/>
+        <arg name="model" value="coffee_cup_model"/>
+        <arg name="model_name" value="coffee_cup_25"/>
+        <arg name="x" value="-4.6"/>
+        <arg name="y" value="1.2"/>
+        <arg name="z" value="0.75"/>
+        <arg name="roll" value="0"/>
+        <arg name="pitch" value="0"/>
+        <arg name="yaw" value="0"/>
+    </include>
+
+
+    <!--<include file="$(find race_gazebo_worlds)/launch/spawn_flowers1.launch" />-->
+    <!--<include file="$(find race_gazebo_worlds)/launch/spawn_fork1.launch" />-->
+    <!--<include file="$(find race_gazebo_worlds)/launch/spawn_knife1.launch" />-->
+    <!--<include file="$(find race_gazebo_worlds)/launch/spawn_mobile1.launch" />-->
+    <!--<include file="$(find race_gazebo_worlds)/launch/spawn_oilservers1.launch" />-->
+
+</launch>

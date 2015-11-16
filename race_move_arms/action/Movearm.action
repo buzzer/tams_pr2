@@ -1,0 +1,9 @@
+# Action definition
+MovearmPosture leftarm
+MovearmPosture rightarm
+---
+# Result definition
+uint8 result
+---
+# Feedback definition
+#int32 feedback

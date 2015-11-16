@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Load the static knowledge into the blackboard -->
+
+  <arg name="demo_11_a" default="false"/>
+  <arg name="demo_11_b" default="false"/>
+  <arg name="demo_11_c" default="false"/>
+  <arg name="demo_12_a" default="false"/>
+  <arg name="demo_12_b" default="false"/>
+  <arg name="demo_21_a" default="false"/>
+  <arg name="demo_21_b" default="false"/>
+  <arg name="demo_21_c" default="false"/>
+  <arg name="demo_22_a" default="false"/>
+  <arg name="demo_22_b" default="false"/>
+  <arg name="demo_24_a" default="false"/>
+  <arg name="demo_24_b" default="false"/>
+  <arg name="serve_clear" default="false"/>
+  <arg name="oru_demo" default="false"/>
+  <arg name="oru_ecai" default="false"/>
+  <arg name="demo_311a" default="false"/>
+  <arg name="demo_311b" default="false"/>
+  <arg name="demo_iros15b" default="false"/> <!-- IROS 2015 replanning -->
+  <arg name="demo_312a" default="false"/>
+  <arg name="demo_32a" default="false"/>
+  <arg name="demo_32c" default="false"/>
+
+  <!-- Demo 1.1 -->
+  <node if="$(arg demo_11_a)" name="$(anon race_static_knowledge_node)" pkg="race_static_knowledge" type="race_static_knowledge.py" respawn="false" output="screen">
+    <param name="initial_knowledge_file" value="$(find race_static_knowledge)/data/race_initial_serve_cup_knowledge_scenario_a.yaml" />
+  </node>
+  <node if="$(arg demo_11_b)" name="$(anon race_static_knowledge_node)" pkg="race_static_knowledge" type="race_static_knowledge.py" respawn="false" output="screen">
+    <param name="initial_knowledge_file" value="$(find race_static_knowledge)/data/race_initial_serve_cup_knowledge_scenario_b.yaml" />
+  </node>
+  <node if="$(arg demo_11_c)" name="$(anon race_static_knowledge_node)" pkg="race_static_knowledge" type="race_static_knowledge.py" respawn="false" output="screen">
+    <param name="initial_knowledge_file" value="$(find race_static_knowledge)/data/race_initial_serve_cup_knowledge_scenario_c.yaml" />
+  </node>
+
+  <!-- Demo 1.2 -->
+  <node if="$(arg demo_12_a)" name="$(anon race_static_knowledge_node)" pkg="race_static_knowledge" type="race_static_knowledge.py" respawn="false" output="screen">
+    <param name="initial_knowledge_file" value="$(find race_static_knowledge)/data/race_initial_clear_table_knowledge_scenario_a.yaml" />
+  </node>
+  <node if="$(arg demo_12_b)" name="$(anon race_static_knowledge_node)" pkg="race_static_knowledge" type="race_static_knowledge.py" respawn="false" output="screen">
+    <param name="initial_knowledge_file" value="$(find race_static_knowledge)/data/race_initial_clear_table_knowledge_scenario_b.yaml" />
+  </node>
+
+  <!-- Demo 2.1: same knowledge as 1.1a (guest on sawt1, mug on paerc1); no knowledge about extension table/human obstacle -->
+  <node if="$(arg demo_21_a)" name="$(anon race_static_knowledge_node)" pkg="race_static_knowledge" type="race_static_knowledge.py" respawn="false" output="screen">
+    <param name="initial_knowledge_file" value="$(find race_static_knowledge)/data/race_initial_serve_cup_knowledge_scenario_a.yaml" />
+  </node>
+  <node if="$(arg demo_21_b)" name="$(anon race_static_knowledge_node)" pkg="race_static_knowledge" type="race_static_knowledge.py" respawn="false" output="screen">
+    <param name="initial_knowledge_file" value="$(find race_static_knowledge)/data/race_initial_serve_cup_knowledge_scenario_a.yaml" />
+  </node>
+  <node if="$(arg demo_21_c)" name="$(anon race_static_knowledge_node)" pkg="race_static_knowledge" type="race_static_knowledge.py" respawn="false" output="screen">
+    <param name="initial_knowledge_file" value="$(find race_static_knowledge)/data/race_initial_serve_cup_knowledge_scenario_a.yaml" />
+  </node>
+
+
+  <!-- Demo 2.2 -->
+  <!-- no special initial knowledge required -->
+
+  <!-- Demo 2.3 -->
+  <!-- no special initial knowledge required -->
+
+  <!-- Demo 2.4 -->
+  <node if="$(arg demo_24_a)" name="$(anon race_static_knowledge_node)" pkg="race_static_knowledge" type="race_static_knowledge.py" respawn="false" output="screen">
+    <param name="initial_knowledge_file" value="$(find race_static_knowledge)/data/race_initial_conceptualize_objects_knowledge.yaml" />
+    <!--<param name="initial_knowledge_file" value="$(find race_static_knowledge)/data/race_initial_serve_cup_knowledge_scenario_a.yaml" />-->
+  </node>
+  <node if="$(arg demo_24_b)" name="$(anon race_static_knowledge_node)" pkg="race_static_knowledge" type="race_static_knowledge.py" respawn="false" output="screen">
+    <param name="initial_knowledge_file" value="$(find race_static_knowledge)/data/race_initial_conceptualize_objects_knowledge.yaml" />
+  </node>
+
+  <!-- Demo serve_clear -->
+  <node if="$(arg serve_clear)" name="$(anon race_static_knowledge_node)" pkg="race_static_knowledge" type="race_static_knowledge.py" respawn="false" output="screen">
+    <param name="initial_knowledge_file" value="$(find race_static_knowledge)/data/race_initial_serve_clear_knowledge.yaml" />
+  </node>
+
+  <!-- Demo oru_demo -->
+  <node if="$(arg oru_demo)" name="$(anon race_static_knowledge_node)" pkg="race_static_knowledge" type="race_static_knowledge.py" respawn="false" output="screen">
+    <param name="initial_knowledge_file" value="$(find race_static_knowledge)/data/race_initial_oru_demo_knowledge.yaml" />
+  </node>
+
+  <!-- Demo oru_ecai -->
+  <node if="$(arg oru_ecai)" name="$(anon race_static_knowledge_node)" pkg="race_static_knowledge" type="race_static_knowledge.py" respawn="false" output="screen">
+    <param name="initial_knowledge_file" value="$(find race_static_knowledge)/data/race_initial_serve_cup_knowledge_scenario_a.yaml" />
+  </node>
+
+  <!--Demo 3.1.1a-->
+  <node if="$(arg demo_311a)" name="$(anon race_static_knowledge_node)" pkg="race_static_knowledge" type="race_static_knowledge.py" respawn="false" output="screen">
+    <param name="initial_knowledge_file" value="$(find race_static_knowledge)/data/race_initial_knowledge_demo_311a.yaml" />
+  </node>
+
+  <!--Demo 3.1.1b-->
+  <node if="$(arg demo_311b)" name="$(anon race_static_knowledge_node)" pkg="race_static_knowledge" type="race_static_knowledge.py" respawn="false" output="screen">
+    <param name="initial_knowledge_file" value="$(find race_static_knowledge)/data/race_initial_knowledge_demo_311b.yaml" />
+  </node>
+
+  <!--Demo iros15b-->
+  <node if="$(arg demo_iros15b)" name="$(anon race_static_knowledge_node)" pkg="race_static_knowledge" type="race_static_knowledge.py" respawn="false" output="screen">
+    <param name="initial_knowledge_file" value="$(find race_static_knowledge)/data/race_initial_knowledge_demo_iros15b.yaml" />
+  </node>
+
+  <!--Demo 3.1.2a-->
+  <node if="$(arg demo_312a)" name="$(anon race_static_knowledge_node)" pkg="race_static_knowledge" type="race_static_knowledge.py" respawn="false" output="screen">
+    <!--param name="initial_knowledge_file" value="$(find race_static_knowledge)/data/race_initial_knowledge_demo_312a.yaml" /-->
+    <param name="initial_knowledge_file" value="$(find race_static_knowledge)/data/race_initial_knowledge_demo_iros15b.yaml" />
+  </node>
+
+  <!--Demo 3.2-->
+  <node if="$(arg demo_32a)" name="$(anon race_static_knowledge_node)" pkg="race_static_knowledge" type="race_static_knowledge.py" respawn="false" output="screen">
+    <param name="initial_knowledge_file" value="$(find race_static_knowledge)/data/race_initial_knowledge_demo_32.yaml" />
+  </node>
+
+  <!--Demo 3.2-->
+  <node if="$(arg demo_32c)" name="$(anon race_static_knowledge_node)" pkg="race_static_knowledge" type="race_static_knowledge.py" respawn="false" output="screen">
+    <param name="initial_knowledge_file" value="$(find race_static_knowledge)/data/race_initial_knowledge_demo_32c.yaml" />
+  </node>
+
+</launch>
+

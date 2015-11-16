@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="namespace" default=""/>
+
+  <param name="flowers1_description" textfile="$(find race_gazebo_worlds)/models/race_flowers1.model" />
+  <node name="spawn_flowers1" pkg="gazebo" type="spawn_model"
+    args="-gazebo -param flowers1_description -gazebo_namespace $(arg namespace)/gazebo -x 0.10 -y 1.35 -z 0.35 -model race_flowers1" respawn="false" output="screen" />
+
+  <!--White Coffee Cup Model-->
+  <param name="coffee_cup_model"
+    command="$(find xacro)/xacro.py '$(find race_gazebo_worlds)/urdf/race_coffee_cup.urdf.xacro'" />
+  <!--Coffee mug 1-->
+  <node name="spawn_coffee_cup1" pkg="gazebo" type="spawn_model"
+    args="-urdf -param coffee_cup_model -gazebo_namespace $(arg namespace)/gazebo -x 0.30 -y 1.30 -z 0.35 -R 0 -P 0 -Y -1.4 -model coffee_cup1" respawn="false" output="screen" />
+
+
+</launch>

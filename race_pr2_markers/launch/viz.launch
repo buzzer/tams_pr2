@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!--RViz-->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find race_pr2_markers)/config/rviz_speedmarkers.vcg" output="screen" />
+
+  <!--Plot dynamics values-->
+  <node name="dynamics_plot_pr2" pkg="rxtools"    
+   type="rxplot" args="                      
+   --title='PR2 Base Dynamics'
+   --legend='linear velocity[m/s],linear acceleration[m/s^2],angular velocity[rad/s],angular acceleration[rad/s^2]'
+   /speedmarker/pr2_base_dynamics/linear/vel:acc
+   /speedmarker/pr2_base_dynamics/angular/vel:acc" />
+
+  <!--Plot base controller values-->
+  <node name="base_ctl_plot_pr2" pkg="rxtools"    
+   type="rxplot" args="                      
+   --title='PR2 Base Controller Dynamics'
+   --legend='linear velocity[m/s],linear acceleration[m/s^2],angular velocity[rad/s],angular acceleration[rad/s^2]'
+   /topple_episode_monitor/topple_episode_part/base_ctl/linear/vel:acc
+   /topple_episode_monitor/topple_episode_part/base_ctl/angular/vel:acc" />
+
+  <node name="dynamics_plot_obj" pkg="rxtools"    
+   type="rxplot" args="                      
+   --title='Tray Object Dynamics'
+   --legend='velocity[m/s],acceleration[m/s^2]'
+   /object_monitor/obj_dynamics/linear/vel:acc" />
+
+  <!--Plot dynamics values-->
+  <node name="obj_plot_deviation" pkg="rxtools"
+    type="rxplot" args="
+    --mode=3d --title='Tray Object Deviation'
+    --legend='angular deviation [rad],linear deviation [m]'
+    --ymin=1.0
+    --ymax=1.0
+    --buffer=120
+    /object_monitor/obj_dev/vector/x:y" />
+
+</launch>

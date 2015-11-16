@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+
+  <node name="delete_chair1_node1" pkg="rosservice" type="rosservice"
+    args="call /gazebo/delete_model '{model_name: race_chair1}'" output="screen"/>
+
+  <node name="set_pr2_table1_node1" pkg="rostopic" type="rostopic"
+    args="pub /gazebo/set_model_state gazebo/ModelState '{model_name:
+    race_pr2, pose: { position: { x: -5.50, y: 1.30, z: 0.00 }, orientation:
+    {x: 0, y: 0, z: 0, w: 1 } }, twist: { linear: { x: 0, y: 0, z: 0 }, angular:
+    { x: 0, y: 0, z: 0}  }, reference_frame: world }'" output="screen"/>
+
+</launch>

@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!--Start up the Gazebo GUI-->
+  <arg name="gui" default="true"/>
+  <!--Environment furniture-->
+  <arg name="furniture" default="true" />
+
+  <!--Serve or clear scenario?-->
+  <arg name="serve" default="false"/>
+  <arg name="clear_12a" default="false"/>
+  <arg name="clear_12b" default="false"/>
+
+  <arg name="launch_gazebo" default="true" />
+
+  <!-- start up restaurant world (DAE collada mesh) -->
+  <!--include file="$(find race_gazebo_worlds)/launch/race_world.launch">
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="furniture" value="$(arg furniture)" />
+    <arg name="launch_gazebo" value="$(arg launch_gazebo)" />
+    <arg name="serve" value="$(arg serve)" />
+    <arg name="clear_12a" value="$(arg clear_12a)" />
+    <arg name="clear_12b" value="$(arg clear_12b)" />
+  </include-->
+
+
+<arg name="use_sim_time" default="true"/>
+  <!--Start up the Gazebo GUI-->
+  <!--arg name="gui" default="true"/-->
+  <!--arg name="launch_gazebo" default="true" /-->
+  <!--Environment furniture-->
+  <!--arg name="furniture" default="true" /-->
+  <!--Serve or clear scenario?-->
+  <!--arg name="serve" default="false"/-->
+  <!--arg name="clear_12a" default="false"/-->
+  <!--arg name="clear_12b" default="false"/-->
+
+  <!--Capsule multiple worlds into own namespace-->
+  <arg name="ns" default="false"/>
+  <arg name="namespace" default=""/>
+
+  <!-- set use_sim_time flag -->
+  <group if="$(arg use_sim_time)">
+    <param name="/use_sim_time" value="true" />
+  </group>
+
+  <!-- start race world -->
+  <group if="$(arg launch_gazebo)">
+    <!--Start with namespace-->
+    <node if="$(arg ns)" ns="$(arg namespace)" name="gazebo" pkg="gazebo" type="gazebo"
+    args="-uv $(find race_gazebo_worlds)/worlds/race.world" respawn="false" output="screen"/>
+    <!--Start without namespace-->
+    <node unless="$(arg ns)" name="gazebo" pkg="gazebo" type="gazebo"
+    args="-uv $(find race_gazebo_worlds)/worlds/race.world" respawn="false" output="screen"/>
+    <!--<node name="gazebo" pkg="gazebo" type="gazebo"-->
+    <!--args="-r $(find race_gazebo_worlds)/worlds/race.world" respawn="false" output="screen"/>-->
+  </group>
+
+  <!-- start gui -->
+  <group if="$(arg gui)">
+    <node if="$(arg ns)" ns="$(arg namespace)" name="gazebo_gui" pkg="gazebo" type="gui" respawn="false" output="screen"/>
+    <node unless="$(arg ns)" name="gazebo_gui" pkg="gazebo" type="gui" respawn="false" output="screen"/>
+  </group>
+
+  <!--Environment furniture-->
+  <group if="$(arg furniture)">
+    <include if="$(arg ns)" ns="$(arg namespace)" file="$(find race_gazebo_worlds)/launch/spawn_race_models.launch">
+      <arg name="namespace" value="/$(arg namespace)" />
+    </include>
+    <include unless="$(arg ns)" file="$(find race_gazebo_worlds)/launch/spawn_race_models.launch"/>
+  </group>
+
+
+
+  <include if="$(arg launch_gazebo)" file="$(find race_gazebo_worlds)/launch/spawn_hybrid_scenario.launch"/>
+  <!-- Move the mugs to their positions -->
+  <!--group if="$(arg serve)">
+    <include if="$(arg ns)" ns="$(arg namespace)" file="$(find race_gazebo_worlds)/launch/spawn_mugs.launch">
+      <arg name="namespace" value="/$(arg namespace)" />
+    </include>
+    <include unless="$(arg ns)" file="$(find race_gazebo_worlds)/launch/spawn_mugs_serve.launch"/>
+  </group-->
+  <!--Clear scenario 12_a-->
+  <!--group if="$(arg clear_12a)">
+    <include if="$(arg ns)" ns="$(arg namespace)" file="$(find race_gazebo_worlds)/launch/spawn_mugs.launch">
+      <arg name="namespace" value="/$(arg namespace)" />
+    </include>
+    <include unless="$(arg ns)" file="$(find race_gazebo_worlds)/launch/spawn_mugs_clear_12a.launch"/>
+  </group-->
+
+  
+  <include if="$(arg launch_gazebo)" file="$(find race_gazebo_worlds)/launch/spawn_pr2.launch"/>
+
+  <!--Launch the tachometer-->
+  <include file="$(find race_tachometer)/launch/pr2_tachometer.launch"/>
+
+</launch>
+
+
+
+

@@ -1,0 +1,13 @@
+/**
+\mainpage
+\htmlinclude manifest.html
+
+\b dragging 
+
+dragging provides an action interface in order to drag dish-like objects
+towards the table edge to grasp it.
+
+-->
+
+
+*/

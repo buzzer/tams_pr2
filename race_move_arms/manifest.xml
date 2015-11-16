@@ -1,0 +1,39 @@
+<package>
+  <description brief="carryarm_actionlib">
+
+    race_move_arms unifies and replaces the existing actions for arm movement:
+
+    tuck_arms (leftposture rightposture)
+    carryarm (carrypose carryarm)
+    move_arm_to_side (arm) (from PickAndPlaceManager)
+
+    It should take two arguments: the goal postures for each arm.
+    The following ArmPostures should be applicable:
+
+    ArmToSidePosture
+    ArmTuckedPosture
+    ArmUntuckedPosture
+    ArmCarryPosture
+
+    As in the tuck_arms action, the action should achieve these
+    goal postures independently of the initial postures of the
+    arms.
+
+
+  </description>
+  <author>Sebastian Rockel</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/carryarm_actionlib</url>
+  <depend package="actionlib"/>
+  <depend package="actionlib_msgs"/>
+
+  <depend package="arm_navigation_msgs" />
+  <depend package="pr2_controllers_msgs" />
+  <depend package="tf"/>
+  <depend package="sensor_msgs"/>
+  <depend package="geometry_msgs" />
+
+</package>
+
+

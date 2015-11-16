@@ -1,0 +1,27 @@
+<package>
+  <description brief="Gazebo files for simulated TAMS restaurant environment">
+
+    race_gazebo_worlds contains Gazebo launch and world files to start the PR2
+    in a simulated TAMS restaurant environment.
+
+  </description>
+  <author>Sebastian Rockel, Martin Günther</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://race.informatik.uni-hamburg.de/wordpress/wiki/index.php/Setup_PR2_Restaurant_Environment</url>
+  <depend package="gazebo"/>
+  <depend package="xacro"/>
+  <depend package="pr2_gazebo"/>
+  <depend package="pr2_controller_configuration_gazebo"/>
+  <depend package="gazebo_worlds"/>
+  <depend package="pr2_tuckarm"/>
+  <depend package="pr2_description"/>
+  <depend package="race_simulation_run"/>
+  
+  <export>
+    <gazebo gazebo_media_path="${prefix}" />
+  </export>
+
+</package>
+
+

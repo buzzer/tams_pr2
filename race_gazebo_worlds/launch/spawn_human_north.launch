@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="namespace" default=""/>
+
+  <node name="spawn_human_north" pkg="gazebo" type="spawn_model"
+    args="rosrun gazebo spawn_model -file $(find race_gazebo_worlds)/models/race_female_standing.model
+    -gazebo -model human_north2 -gazebo_namespace $(arg namespace)/gazebo -x -4.60 -y 2.10 -Y 3.14" output="screen"/>
+
+</launch>

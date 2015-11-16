@@ -1,0 +1,16 @@
+<launch>
+  <!-- machine tags for sim and pr2, be sure to set environment variable ROBOT to correct setting -->
+  <include file="$(find pr2_machine)/$(env ROBOT).machine" />
+  <include file="$(find race_navigation)/config/amcl_node_oru_demo.xml" />
+  <include file="$(find pr2_navigation_teleop)/teleop.xml" />
+  <include file="$(find pr2_navigation_perception)/lasers_and_filters.xml" />
+  <!--include file="$(find 2dnav_pr2)/config/map_server.launch" /-->
+  <include file="$(find pr2_navigation_perception)/ground_plane.xml" />
+  <!-- The navigation stack and associated parameters -->
+  <include file="$(find pr2_navigation_global)/move_base.xml" />
+
+  <node name="map_server" pkg="map_server" type="map_server"
+    args="$(find race_navigation)/config/map_$(env ROBOT).pgm 0.05" 
+    respawn="true" />
+
+</launch>

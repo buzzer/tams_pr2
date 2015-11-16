@@ -1,0 +1,22 @@
+<package>
+  <description brief="carryarm_actionlib">
+
+     carryarm_actionlib
+
+  </description>
+  <author>Sebastian Rockel</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/carryarm_actionlib</url>
+  <depend package="actionlib"/>
+  <depend package="actionlib_msgs"/>
+
+  <depend package="arm_navigation_msgs" />
+  <depend package="pr2_controllers_msgs" />
+  <depend package="tf"/>
+  <depend package="sensor_msgs"/>
+  <depend package="geometry_msgs" />
+
+</package>
+
+

@@ -1,0 +1,70 @@
+<launch>
+
+  <arg name="use_sim_time" default="true"/>
+  <!--Start up the Gazebo GUI-->
+  <arg name="gui" default="true"/>
+
+  <!-- set use_sim_time flag -->
+  <group if="$(arg use_sim_time)">
+    <param name="/use_sim_time" value="true" />
+  </group>
+
+  <!-- start race world -->
+  <!--<node name="gazebo" pkg="gazebo" type="gazebo"-->
+    <!--[>args="-uv $(find race_gazebo_worlds)/worlds/race.world" respawn="false" output="screen"/><]-->
+  <node name="gazebo" pkg="gazebo" type="gazebo"
+    args="-uv $(find gazebo_worlds)/worlds/empty.world" respawn="false" output="screen"/>
+
+  <!-- start gui -->
+  <group if="$(arg gui)">
+    <node name="gazebo_gui" pkg="gazebo" type="gui" respawn="false" output="screen"/>
+  </group>
+
+  <!--Environment objects-->
+
+  <!--Tables-->
+  <!--<param name="table_description" textfile="$(find race_gazebo_worlds)/models/race_table2.model" />-->
+  <!--[><node name="spawn_table0" pkg="gazebo" type="spawn_model" args="-gazebo -param table_description -x -5.15 -y 3.56 -z 0.001 -Y 0.00 -model race_table0" respawn="false" output="screen" /><]-->
+  <!--<node name="spawn_table4" pkg="gazebo" type="spawn_model" args="-gazebo -param table_description -x -5.55 -y 4.79 -z 0.001 -Y 1.57 -model race_table4" respawn="false" output="screen" />-->
+  <!--[><node name="spawn_table5" pkg="gazebo" type="spawn_model" args="-gazebo -param table_description -x -1.33 -y 3.62 -z 0.001 -Y 0.00 -model race_table5" respawn="false" output="screen" /><]-->
+  <!--<node name="spawn_table6" pkg="gazebo" type="spawn_model" args="-gazebo -param table_description -x -0.91 -y 4.79 -z 0.001 -Y 1.57 -model race_table6" respawn="false" output="screen" />-->
+  <!--<node name="spawn_table7" pkg="gazebo" type="spawn_model" args="-gazebo -param table_description -x -1.73 -y 4.79 -z 0.001 -Y 1.57 -model race_table7" respawn="false" output="screen" />-->
+  <!--<node name="spawn_table8" pkg="gazebo" type="spawn_model" args="-gazebo -param table_description -x -4.73 -y 4.79 -z 0.001 -Y 1.57 -model race_table8" respawn="false" output="screen" />-->
+
+  <!--<param name="table_description_70x70" textfile="$(find race_gazebo_worlds)/models/race_table_70x70.model" />-->
+  <param name="table_description_140x70" textfile="$(find race_gazebo_worlds)/models/race_table_140x70.model" />
+  <!--Counter-->
+  <node name="spawn_counter1" pkg="gazebo" type="spawn_model" args="-gazebo -param table_description_140x70 -x -7.13 -y -0.13 -z 0.001 -Y 1.57 -model race_counter1" respawn="false" output="screen" />
+  <!--[>Table 1<]-->
+  <!--<node name="spawn_table1" pkg="gazebo" type="spawn_model" args="-gazebo -param table_description_70x70 -x -4.60 -y 1.29 -z 0.001 -Y 1.57 -model race_table1" respawn="false" output="screen" />-->
+  <!--[>Table 2<]-->
+  <!--<node name="spawn_table2" pkg="gazebo" type="spawn_model" args="-gazebo -param table_description_70x70 -x -2.05 -y 1.23 -z 0.001 -Y 1.57 -model race_table2" respawn="false" output="screen" />-->
+
+  <!--Chairs-->
+  <!--<param name="chair_description" textfile="$(find race_gazebo_worlds)/models/race_chair1.model" />-->
+  <!--[><node name="spawn_chair1" pkg="gazebo" type="spawn_model" args="-gazebo -param chair_description -x -5.23 -y 1.23 -z 0.001 -Y -0.58 -model race_chair1" respawn="false" output="screen" /><]-->
+  <!--<node name="spawn_chair1" pkg="gazebo" type="spawn_model" args="-gazebo -param chair_description -x -5.23 -y 1.23 -z 0.001 -Y -0.00 -model race_chair1" respawn="false" output="screen" />-->
+  <!--<node name="spawn_chair2" pkg="gazebo" type="spawn_model" args="-gazebo -param chair_description -x -3.96 -y 1.22 -z 0.001 -Y -1.57 -model race_chair2" respawn="false" output="screen" />-->
+  <!--<node name="spawn_chair3" pkg="gazebo" type="spawn_model" args="-gazebo -param chair_description -x -2.04 -y 1.86 -z 0.001 -Y 0.00 -model race_chair3" respawn="false" output="screen" />-->
+  <!--<node name="spawn_chair4" pkg="gazebo" type="spawn_model" args="-gazebo -param chair_description -x -2.06 -y 0.60 -z 0.001 -Y 3.14 -model race_chair4" respawn="false" output="screen" />-->
+
+  <!-- send models (in gazebo format) to param server and spawn -->
+  <!--<param name="bowl_model" textfile="$(find race_gazebo_worlds)/models/bowl.model" />-->
+  <!--<node name="spawn_bowl" pkg="gazebo" type="spawn_model" args="-gazebo -param bowl_model  -x -5.5 -y 3.43 -z 0.74 -R 0 -P 0 -Y 0 -model bowl" respawn="false" output="screen" />-->
+  
+  <!--Coke can 1-->
+  <!--<param name="coke_can_model" textfile="$(find race_gazebo_worlds)/models/coke_can.model" />-->
+  <!--<node name="spawn_coke_can" pkg="gazebo" type="spawn_model" args="-gazebo -param coke_can_model -x -7.15 -y 0.34 -z 0.74 -R 0 -P 0 -Y 0 -model coke_can1" respawn="false" output="screen" />-->
+  
+  <!--Coffee mug 1-->
+  <param name="coffee_cup_model" command="$(find xacro)/xacro.py '$(find race_gazebo_worlds)/urdf/race_coffee_cup.urdf.xacro'" />
+  <node name="spawn_coffee_cup1" pkg="gazebo" type="spawn_model" args="-urdf -param coffee_cup_model -x -6.91 -y -0.00 -z 0.76 -R 0 -P 0 -Y -1.4 -model coffee_cup1" respawn="false" output="screen" />
+  <!--Coffee mug 2-->
+  <param name="coffee_cup_model" command="$(find xacro)/xacro.py '$(find race_gazebo_worlds)/urdf/race_coffee_cup.urdf.xacro'" />
+  <node name="spawn_coffee_cup2" pkg="gazebo" type="spawn_model" args="-urdf -param coffee_cup_model -x -6.91 -y -0.44 -z 0.76 -R 0 -P 0 -Y -1.4 -model coffee_cup2" respawn="false" output="screen" />
+
+  <!--The Tray-->
+  <!--<param name="race_tray_urdf" textfile="$(find race_gazebo_worlds)/urdf/race_tray.urdf" />-->
+  <!--<node name="spawn_race_tray_model" pkg="gazebo" type="spawn_model" args="-urdf -param race_tray_urdf -model race_tray_1 -x -5.02 -y 3.34 -z 0.92" respawn="false" output="screen" />-->
+
+</launch>

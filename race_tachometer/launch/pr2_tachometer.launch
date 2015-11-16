@@ -1,0 +1,14 @@
+<launch>
+
+  <!--Where the data shall be stored/read-->
+  <arg name="filepath" default="$(find race_tachometer)/data/data.dat"/>
+
+  <!--Prepare data file-->
+  <node name="tachometer_preprocess" pkg="race_tachometer" type="preprocess.sh" output="screen"/>
+
+  <!--Launch the tachometer-->
+  <node pkg="race_tachometer" type="pr2_tachometer" name="pr2_tachometer" output="screen">
+    <param name="file_path" value="$(arg filepath)" />
+  </node>
+
+</launch>

@@ -1,0 +1,18 @@
+<package>
+  <description brief="race_pr2_description">
+
+     race_pr2_description contains the RACE specific parts in addition to or as
+     replacement to the standard ROS pr2_description package.
+
+  </description>
+  <author>Sebastian Rockel</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/race_pr2_description</url>
+
+  <depend package="hector_gazebo_thermal_camera"/>
+  <depend package="hector_gazebo_plugins"/>
+
+</package>
+
+

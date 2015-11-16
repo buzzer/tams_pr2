@@ -1,0 +1,285 @@
+# NOTE: This is the global blackboard topics config, where all new topics
+# should be entered. For illustrative examples, see race_bb/config/topics.yaml
+!DemandTopic
+# for smach_plan_executor
+Name: monitored_failure
+ClassFilter: [MonitoredFailure]
+SubclassFilter: [MonitoredFailure]
+SuperclassFilter: []
+PropertyFilterMode: union
+PropertyFilter: []
+QueryFilter: []
+---
+# for stefan's execution monitoring AND the holding_monitor (DON'T DELETE)
+!DemandTopic
+Name: stefan_result
+ClassFilter: []
+SubclassFilter: [RobotActivity]
+SuperclassFilter: []
+PropertyFilterMode: intersection
+PropertyFilter: [hasResult]
+QueryFilter: []
+---
+#!DemandTopic
+#Name: stefan_start
+#ClassFilter: []
+#SubclassFilter: [RobotActivity]
+#SuperclassFilter: []
+#PropertyFilterMode: union
+#PropertyFilter: []
+#QueryFilter: []
+#---
+#!DemandTopic
+#Name: stefan_trace
+#ClassFilter: []
+#SubclassFilter: ["RobotPosture","ArtificialBodyPart","Mug","RobotActivity"]
+#SuperclassFilter: []
+#PropertyFilterMode: union
+#PropertyFilter: []
+#QueryFilter: []
+#---
+!DemandTopic
+# for race_plan_execution_monitor
+Name: stefan_grasp
+ClassFilter: ["Holding"]
+SubclassFilter: ["GripperPosture"]
+SuperclassFilter: []
+PropertyFilterMode: union
+PropertyFilter: []
+QueryFilter: []
+---
+!DemandTopic
+Name: timeline_semantic_dispatcher
+QueryFilter: ['select distinct ?instance where {{{?instance rdf:type upper:On} union {?instance rdf:type upper:RobotAt} union {?instance rdf:type upper:Holding} union {?instance rdf:type race:Mug} } union { ?instance rdf:type ?subclass . { { ?subclass rdfs:subClassOf+ race:ArmPosture} union {?subclass rdfs:subClassOf+ race:TorsoPosture} }}}']
+---
+!DemandTopic
+Name: stefan_dispatcher_trace
+QueryFilter: ['select distinct ?instance where {{{?instance rdf:type upper:Point} union {?instance rdf:type race:Table} union {?instance rdf:type upper:On} union {?instance rdf:type upper:Holding} union {?instance rdf:type race:Arm} union {?instance rdf:type race:Gripper}  union {?instance rdf:type race:GripperHoldingPosture} union {?instance rdf:type race:Torso} union {?instance rdf:type upper:At} union {?instance rdf:type upper:RobotAt}} union { ?instance rdf:type ?subclass . { { ?subclass rdfs:subClassOf+ race:ArmPosture} union {?subclass rdfs:subClassOf+ race:TorsoPosture}}}}']
+---
+!DemandTopic
+Name: stefan_holding_debug
+QueryFilter: ['select distinct ?instance where {{?instance rdf:type upper:On} union {?instance rdf:type upper:Holding} union {?instance rdf:type race:GripperHoldingPosture}}']
+---
+!DemandTopic
+Name: stefan_activity_all
+QueryFilter: ['select distinct ?instance where { ?instance rdf:type ?subclass . ?subclass rdfs:subClassOf+ upper:ElementaryRobotActivity}']
+---
+!DemandTopic
+Name: stefan_blocked
+QueryFilter: ['select distinct ?instance where { ?instance rdf:type ?subclass . ?subclass rdfs:subClassOf+ race:BlockedState}']
+---
+#!DemandTopic
+#Name: timeline_activity_all
+#QueryFilter: ['select distinct ?instance where { ?instance rdf:type ?subclass . ?subclass rdfs:subClassOf+ upper:ElementaryRobotActivity}']
+#---
+#!DemandTopic
+#Name: timeline_dispatcher_torso_posture_all
+#QueryFilter: ['select distinct ?instance where { ?instance rdf:type ?subclass . ?subclass rdfs:subClassOf+ race:TorsoPosture}']
+#---
+#!DemandTopic
+#Name: timeline_dispatcher_arm_posture_all
+#QueryFilter: ['select distinct ?instance where { ?instance rdf:type ?subclass . ?subclass rdfs:subClassOf+ race:ArmPosture}']
+#---
+#!DemandTopic
+#Name: timeline_dispatcher_on_all
+#QueryFilter: ['select distinct ?instance where {?instance rdf:type upper:On}']
+#---
+#!DemandTopic
+#Name: timeline_dispatcher_robot_at_all
+#QueryFilter: ['select distinct ?instance where {?instance rdf:type upper:RobotAt}']
+#---
+#!DemandTopic
+#Name: timeline_dispatcher_holding_all
+#QueryFilter: ['select distinct ?instance where {?instance rdf:type upper:Holding}']
+#---
+#!DemandTopic
+#Name: timeline_dispatcher_mug_all
+#QueryFilter: ['select distinct ?instance where {?instance rdf:type race:Mug}']
+#---
+#!DemandTopic
+#Name: stefan_dispatcher_move
+#QueryFilter: ['select distinct ?instance where { ?instance rdf:type upper:RobotAt }']
+#---
+#!DemandTopic
+#Name: stefan_dispatcher_move_activity
+#QueryFilter: ['select distinct ?instance where { { ?instance rdf:type race:MoveBaseActivity } union { ?instance rdf:type race:MoveBaseBlindActivity } }']
+#---
+#!DemandTopic
+#Name: stefan_arm_on
+#ClassFilter: ["Arm"]
+#SubclassFilter: []
+#SuperclassFilter: []
+#PropertyFilterMode: union
+#PropertyFilter: []
+#QueryFilter: []
+#---
+#!DemandTopic
+#Name: stefan_failure
+#ClassFilter: []
+#SubclassFilter: ["MonitoredFailure"]
+#SuperclassFilter: []
+#PropertyFilterMode: union
+#PropertyFilter: []
+#QueryFilter: []
+#---
+!DemandTopic
+Name: intent
+ClassFilter: [Intent]
+SubclassFilter: []
+SuperclassFilter: []
+PropertyFilterMode: union
+PropertyFilter: []
+QueryFilter: []
+---
+!DemandTopic
+Name: instructor_abort
+ClassFilter: [InstructorAbort]
+SubclassFilter: []
+SuperclassFilter: []
+PropertyFilterMode: union
+PropertyFilter: []
+QueryFilter: []
+---
+# topic for area_marker_publisher.py
+!DemandTopic
+Name: areas
+QueryFilter: ['select distinct ?instance where {?instance upper:hasBoundingBox ?any}']
+---
+## topic for second area_marker_publisher.py: only subclasses of PassiveObject (no Areas)
+#!DemandTopic
+#Name: passive_objects_with_bbox
+#QueryFilter: ['select distinct ?instance where {?instance upper:hasBoundingBox ?any . ?instance a ?subclass . ?subclass rdfs:subClassOf+ upper:PassiveObject}']
+#---
+# topic for object anchoring: all initial tabletop objects
+!DemandTopic
+Name: tabletop_objects
+QueryFilter: ['select distinct ?instance where {?instance upper:hasBoundingBox ?any . ?instance a ?subclass . {{?subclass rdfs:subClassOf+ race:Kitchenware} UNION {?subclass rdfs:subClassOf+ race:PersonalItem}}}']
+---
+!DemandTopic
+Name: instructorAchieve
+ClassFilter: [InstructorAchieve]
+SubclassFilter: []
+SuperclassFilter: []
+PropertyFilterMode: union
+PropertyFilter: []
+QueryFilter: []
+---
+!DemandTopic
+Name: beginEpisode
+ClassFilter: [BeginEpisode]
+SubclassFilter: []
+SuperclassFilter: []
+PropertyFilterMode: union
+PropertyFilter: []
+QueryFilter: []
+---
+#!DemandTopic
+#Name: endEpisode
+#ClassFilter: [EndEpisode]
+#SubclassFilter: []
+#SuperclassFilter: []
+#PropertyFilterMode: union
+#PropertyFilter: []
+#QueryFilter: []
+#---
+!DemandTopic
+Name: plan
+ClassFilter: [Plan]
+SubclassFilter: [Plan]
+---
+!DemandTopic
+Name: instructor_teach
+ClassFilter: []
+SubclassFilter: [InstructorTeach]
+SuperclassFilter: []
+PropertyFilterMode: union
+PropertyFilter: []
+QueryFilter: []
+---
+#### BEGIN VISUALIZATION-RELATED QUERIES
+#!DemandTopic
+#Name: timeline_all_fluents
+#QueryFilter: ['select distinct ?instance where {?instance rdf:type ?subclass . ?subclass rdfs:subClassOf+ owl:Thing}']
+#---
+#!DemandTopic
+#Name: timeline_has_upper_PhysicalEntity
+#QueryFilter: ['select distinct ?instance where {?instance upper:hasPhysicalEntity ?any}']
+#---
+#!DemandTopic
+#Name: timeline_has_bounded_upper_StartTime
+#QueryFilter: ['select distinct ?instance where {?instance upper:hasStartTimeLowerBound ?time . Filter(?time > "1970-01-01T00:00:00"^^xsd:dateTime)}']
+#---
+#!DemandTopic
+#Name: timeline_is_upper_On
+#QueryFilter: ['select distinct ?instance where {?instance rdf:type upper:On}']
+#---
+#!DemandTopic
+#Name: timeline_is_upper_At
+#QueryFilter: ['select distinct ?instance where {?instance rdf:type upper:At}']
+#---
+#!DemandTopic
+#Name: timeline_is_upper_RobotAt
+#QueryFilter: ['select distinct ?instance where {?instance rdf:type upper:RobotAt}']
+#---
+#!DemandTopic
+#Name: timeline_is_race_rightArm1_or_has_race_ArmPosture
+#QueryFilter: ['select distinct ?instance where {race:rightArm1 race:hasArmPosture ?instance}']
+#---
+#!DemandTopic
+#Name: timeline_is_race_leftArm1_or_has_race_ArmPosture
+#QueryFilter: ['select distinct ?instance where {race:leftArm1 race:hasArmPosture ?instance}']
+#---
+#!DemandTopic
+#Name: timeline_is_race_TorsoPosture
+#QueryFilter: ['select distinct ?instance where {?instance rdf:type ?subclass . ?subclass rdfs:subClassOf+ race:TorsoPosture}']
+#---
+#!DemandTopic
+#Name: timeline_is_upper_RobotPosture
+#QueryFilter: ['select distinct ?instance where {?instance rdf:type ?subclass . ?subclass rdfs:subClassOf+ upper:RobotPosture}']
+#---
+#!DemandTopic
+#Name: timeline_is_upper_ElementaryRobotActivity
+#QueryFilter: ['select distinct ?instance where {?instance rdf:type ?subclass . ?subclass rdfs:subClassOf+ upper:ElementaryRobotActivity}']
+#---
+#!DemandTopic
+#Name: timeline_is_upper_InstructorDialogMove
+#QueryFilter: ['select ?instructions where {?any rdfs:subClassOf* upper:InstructorDialogMove . ?instructions rdf:type ?any}']
+#---
+#!DemandTopic
+#Name: timeline_is_upper_Experience
+#QueryFilter: ['select ?instructions where {?any rdfs:subClassOf* upper:Experience . ?instructions rdf:type ?any}']
+#### END VISUALIZATION-RELATED QUERIES
+#---
+!DemandTopic
+Name: robot_task
+QueryFilter: ['select distinct ?instance where {?instance rdf:type ?subclass . ?subclass rdfs:subClassOf+ upper:Task}']
+---
+!DemandTopic
+Name: primitive_robot_task
+QueryFilter: ['select distinct ?instance where {?instance rdf:type ?subclass . ?subclass rdfs:subClassOf+ upper:PrimitiveTask}']
+---
+!DemandTopic
+Name: compound_robot_task
+QueryFilter: ['select distinct ?instance where {?instance rdf:type ?subclass . ?subclass rdfs:subClassOf+ upper:CompoundTask}']
+---
+!DemandTopic
+Name: elementary_robot_activity
+QueryFilter: ['select distinct ?instance where {?instance rdf:type ?subclass . ?subclass rdfs:subClassOf+ upper:ElementaryRobotActivity}']
+---
+!DemandTopic
+Name: robot_activity
+QueryFilter: ['select distinct ?instance where {?instance rdf:type ?subclass . ?subclass rdfs:subClassOf+ upper:RobotActivity}']
+---
+# for race_spatial_reasoner
+!DemandTopic
+Name: passiveObjectTopic
+QueryFilter: ['select distinct ?instance where {?instance a ?subclass. ?subclass rdfs:subClassOf+ race:Furniture}']
+---
+# for robot_at_monitor
+!DemandTopic
+Name: floor_areas
+QueryFilter: ['select distinct ?area where {?area rdf:type ?type . ?type rdfs:subClassOf* upper:Area . ?area upper:hasBoundingBox ?bbox . ?bbox upper:hasPose ?pose . ?pose upper:hasZ "0.0"^^xsd:float}']
+---
+!DemandTopic
+Name: instructorCancelAffordance
+ClassFilter: [InstructorCancelAffordance]

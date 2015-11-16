@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- SPAWN BOWL 1 -->
+    <include file="$(find race_gazebo_worlds)/launch/spawn_object_at_xyz.launch">
+        <arg name="model" value="race_bowl"/>
+        <arg name="model_name" value="bowl_321"/>
+        <arg name="x" value="-2.029997" />
+        <arg name="y" value="1.09" />
+        <arg name="z" value="0.77" />
+        <arg name="roll" value="0"/>
+        <arg name="pitch" value="0"/>
+        <arg name="yaw" value="0"/>
+    </include>
+
+    <!-- SPAWN FORK 1 -->
+    <include file="$(find race_gazebo_worlds)/launch/spawn_object_at_xyz.launch">
+        <arg name="model" value="race_fork1"/>
+        <arg name="model_name" value="fork_321"/>
+        <arg name="x" value="-2.180000"/>
+        <arg name="y" value="1.09"/>
+        <arg name="z" value="0.77"/>
+        <arg name="roll" value="0"/>
+        <arg name="pitch" value="0"/>
+        <arg name="yaw" value="-4.71"/>
+    </include>
+
+    <!-- SPAWN KNIFE 1 -->
+    <include file="$(find race_gazebo_worlds)/launch/spawn_object_at_xyz.launch">
+        <arg name="model" value="race_knife1"/>
+        <arg name="model_name" value="knife_321"/>
+        <arg name="x" value="-1.880000"/>
+        <arg name="y" value="1.090000"/>
+        <arg name="z" value="0.77"/>
+        <arg name="roll" value="0"/>
+        <arg name="pitch" value="0"/>
+        <arg name="yaw" value="-4.71"/>
+    </include>
+    
+    <!-- SPAWN BOWL 2 -->
+    <include file="$(find race_gazebo_worlds)/launch/spawn_object_at_xyz.launch">
+        <arg name="model" value="race_bowl"/>
+        <arg name="model_name" value="bowl_322"/>
+        <arg name="x" value="-2.029997" />
+        <arg name="y" value="1.52" />
+        <arg name="z" value="0.77" />
+        <arg name="roll" value="0"/>
+        <arg name="pitch" value="0"/>
+        <arg name="yaw" value="0"/>
+    </include>
+    
+    <!-- SPAWN FORK 2 -->
+    <include file="$(find race_gazebo_worlds)/launch/spawn_object_at_xyz.launch">
+        <arg name="model" value="race_fork1"/>
+        <arg name="model_name" value="fork_322"/>
+        <arg name="x" value="-1.88"/>
+        <arg name="y" value="1.52"/>
+        <arg name="z" value="0.77"/>
+        <arg name="roll" value="0"/>
+        <arg name="pitch" value="0"/>
+        <arg name="yaw" value="-1.53"/>
+    </include>
+
+    <!-- SPAWN KNIFE 2 -->
+    <include file="$(find race_gazebo_worlds)/launch/spawn_object_at_xyz.launch">
+        <arg name="model" value="race_knife1"/>
+        <arg name="model_name" value="knife_322"/>
+        <arg name="x" value="-2.18"/>
+        <arg name="y" value="1.52"/>
+        <arg name="z" value="0.77"/>
+        <arg name="roll" value="0"/>
+        <arg name="pitch" value="0"/>
+        <arg name="yaw" value="-1.53"/>
+    </include>
+
+    <!-- SPAWN MUG 1 -->
+    <include file="$(find race_gazebo_worlds)/launch/spawn_object_at_xyz.launch">
+        <arg name="urdf" value="true"/>
+        <arg name="model" value="coffee_cup_model"/>
+        <arg name="model_name" value="mug_321"/>
+        <arg name="x" value="-1.86"/>
+        <arg name="y" value="1.26"/>
+        <arg name="z" value="0.75"/>
+        <arg name="roll" value="0"/>
+        <arg name="pitch" value="0"/>
+        <arg name="yaw" value="0"/>
+    </include>
+    
+    <!-- SPAWN MUG 2 -->
+    <include file="$(find race_gazebo_worlds)/launch/spawn_object_at_xyz.launch">
+        <arg name="urdf" value="true"/>
+        <arg name="model" value="coffee_cup_model"/>
+        <arg name="model_name" value="mug_322"/>
+        <arg name="x" value="-2.25"/>
+        <arg name="y" value="1.5"/>
+        <arg name="z" value="0.75"/>
+        <arg name="roll" value="0"/>
+        <arg name="pitch" value="0"/>
+        <arg name="yaw" value="0"/>
+    </include>
+    
+    <!-- SPAWN MENU CARD -->
+    <include file="$(find race_gazebo_worlds)/launch/spawn_object_at_xyz.launch">
+        <arg name="model" value="race_menucard"/>
+        <arg name="model_name" value="menucard_321"/>
+        <arg name="x" value="-2.05"/>
+        <arg name="y" value="1.35"/>
+        <arg name="z" value="0.85"/>
+        <arg name="roll" value="0"/>
+        <arg name="pitch" value="4.71"/>
+        <arg name="yaw" value="0"/>
+    </include>
+
+    <!-- SPAWN SUGAR AND MILK POT
+    <include file="$(find race_gazebo_worlds)/launch/spawn_object_at_xyz.launch">
+        <arg name="urdf" value="true"/>
+        <arg name="model" value="coffee_cup_model"/>
+        <arg name="model_name" value="sugarpot_321"/>
+        <arg name="x" value="-1.93"/>
+        <arg name="y" value="1.36"/>
+        <arg name="z" value="0.75"/>
+        <arg name="roll" value="0"/>
+        <arg name="pitch" value="0"/>
+        <arg name="yaw" value="0"/>
+    </include>
+    <include file="$(find race_gazebo_worlds)/launch/spawn_object_at_xyz.launch">
+        <arg name="urdf" value="true"/>
+        <arg name="model" value="coffee_cup_model"/>
+        <arg name="model_name" value="milkpot_321"/>
+        <arg name="x" value="-1.72"/>
+        <arg name="y" value="1.3"/>
+        <arg name="z" value="0.75"/>
+        <arg name="roll" value="0"/>
+        <arg name="pitch" value="0"/>
+        <arg name="yaw" value="0"/>
+    </include>
+    -->
+</launch>

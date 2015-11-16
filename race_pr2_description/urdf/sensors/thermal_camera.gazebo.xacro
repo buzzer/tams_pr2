@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+       xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+       xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+       xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="thermal_camera_gazebo_v0" params="name camera_name image_format image_topic_name camera_info_topic_name hfov update_rate focal_length frame_id hack_baseline image_width image_height">
+    <gazebo reference="${name}_frame">
+      <sensor:camera name="${name}_sensor">
+        <imageSize>${image_width} ${image_height}</imageSize>
+        <imageFormat>${image_format}</imageFormat>
+        <hfov>${hfov}</hfov>
+        <!--<nearClip>0.1</nearClip>-->
+        <nearClip>0.01</nearClip>
+        <farClip>100</farClip>
+        <updateRate>${update_rate}</updateRate>
+        <controller:gazebo_ros_thermal_camera name="${name}_controller" plugin="libgazebo_ros_thermal_depth_camera.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>${update_rate}</updateRate>
+          <cameraName>${camera_name}</cameraName>
+          <imageTopicName>${image_topic_name}</imageTopicName>
+          <cameraInfoTopicName>${camera_info_topic_name}</cameraInfoTopicName>
+          <frameName>${frame_id}</frameName>
+          <hackBaseline>${hack_baseline}</hackBaseline>
+          <CxPrime>${(image_width+1)/2}</CxPrime>
+          <Cx>${(image_width+1)/2}</Cx>
+          <Cy>${(image_height+1)/2}</Cy>
+          <!-- image_width / (2*tan(hfov_radian /2)) -->
+          <!-- 320 for wide and 772.55 for narrow stereo camera -->
+          <focalLength>${focal_length}</focalLength>
+          <distortionK1>0.00000001</distortionK1>
+          <distortionK2>0.00000001</distortionK2>
+          <distortionK3>0.00000001</distortionK3>
+          <distortionT1>0.00000001</distortionT1>
+          <distortionT2>0.00000001</distortionT2>
+          <interface:camera name="${name}_iface" />
+        </controller:gazebo_ros_thermal_camera>
+      </sensor:camera>
+      <turnGravityOff>true</turnGravityOff>
+      <material>PR2/Blue</material>
+    </gazebo>
+  </xacro:macro>
+
+</robot>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- pick position offset for simulation -->
+  <arg name="sim" default="true"/>
+  
+  <node if="$(arg sim)" name="tray_pick_place" pkg="tray_pick_place" type="tray_pick_place_actionserver" args="0.01 0.01 0.02" output="screen" />
+  <node unless="$(arg sim)" name="tray_pick_place" pkg="tray_pick_place" type="tray_pick_place_actionserver" args="-0.015 -0.015 0.005" output="screen" />
+  
+  <node name="tray_palm_tf_listener" pkg="tray_pick_place" type="tray_palm_tf_listener" output="screen" />
+  <node name="race_tray_monitor" pkg="race_tray_monitor" type="race_tray_monitor" respawn="false"/>
+  
+</launch>

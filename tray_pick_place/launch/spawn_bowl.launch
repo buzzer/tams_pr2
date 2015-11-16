@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="namespace" default=""/>
+
+  <param name="bowl_description" textfile="$(find race_gazebo_worlds)/models/race_bowl.model" />
+  <!--<node name="spawn_object" pkg="gazebo" type="gzfactory" args="spawn -f $(find race_gazebo_worlds)/models/race_bowl.model -x -4.73 -y 1.29 -z 0.73"/>-->
+  <node name="spawn_bowl" pkg="gazebo" type="spawn_model"
+    args="-gazebo -param bowl_description -gazebo_namespace $(arg namespace)/gazebo -x 0.57 -y 0.188 -z 0.55 -model race_bowl" respawn="false" output="screen" />
+
+</launch>

@@ -1,0 +1,17 @@
+<package>
+  <description brief="robot_motion_param">
+
+     robot_motion_param sets maximum velocity and acceleration limits for move_base during run-time.
+
+  </description>
+  <author>Sebastian Rockel</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/robot_motion_param</url>
+  <depend package="roscpp"/>
+  <depend package="rospy"/>
+  <depend package="dynamic_reconfigure"/>
+
+</package>
+
+

@@ -1,0 +1,23 @@
+<launch>
+  <include file="$(find pr2_machine)/$(env ROBOT).machine" />
+
+  <!--Where the data shall be stored/read, e.g. on the PR2 it's:-->
+  <arg name="kinect_prefix" default="/head_mount_kinect"/>
+
+  <!--Launch the point cloud filter-->
+  <node machine="c1" name="pc_detector" pkg="race_obstacle_detector" type="pc_detector" output="screen" respawn="true">
+    <param name="rgbd_topic" value="$(arg kinect_prefix)/depth_registered/points" />
+  </node>
+
+  <!--Launch the obstacle recognizer-->
+  <node machine="c2" name="obstacle_detection" pkg="race_obstacle_detector" type="obstacle_detector" output="screen" respawn="true" />
+  <node machine="c2" name="wait_until_unblocked_action" pkg="race_obstacle_detector" type="wait_until_unblocked_action" output="screen" respawn="true" />
+
+  <!--Reduce the amount of kinect data over time-->
+  <!--has to be after the pc_detector launch!-->
+  <!--<node name="$(anon dynparam)" pkg="dynamic_reconfigure" type="dynparam"-->
+    <!--args="set $(arg kinect_prefix)/driver data_skip 10" />-->
+  <node name="$(anon dynparam)" pkg="dynamic_reconfigure" type="dynparam"
+    args="set $(arg kinect_prefix)/driver data_skip 5" />
+
+</launch>

@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- READ ME: This is the common launch file for smach_plan_executor and
+       smach_plan_scheduler (hence the name). There are separate launch files
+       for those two executors that can be used directly. -->
+
+  <!--Planning domain to use-->
+  <arg name="domain" default="$(find race_shop2_planner)/domains/race_owl_domain.lisp"/>
+
+  <!--Start up the Gazebo GUI-->
+  <arg name="gui" default="true"/>
+
+  <!-- set stereo to true for narrow stereo, false for kinect -->
+  <arg name="stereo" default="false" />
+
+  <!-- use sim if you're in simulation and don't want to run openni_node -->
+  <arg name="sim" default="true" />
+
+  <!-- Define the blackboard config, i.e. the sesame_server: remote or local -->
+  <arg name="sesame_remote" default="true"/>
+
+  <!-- sesame server -->
+  <arg if="$(arg sesame_remote)" name="sesame_server" default="http://hitec-race.informatik.uni-hamburg.de:8080/openrdf-sesame/" />
+  <arg unless="$(arg sesame_remote)" name="sesame_server" default="http://localhost:8080/openrdf-sesame/" />  
+
+  <!-- sesame repo to use; mandatory, set it like this:
+          roslaunch race_bringup race_common.launch sesame_repo:='22'
+       -->
+  <arg name="sesame_repo" />
+  <arg name="launch_gazebo" default="true" />
+
+  <!-- Start Gazebo within a namespace, e.g. /sim1/gazebo -->
+  <arg if="$(arg sim)" name="namespace" default="" />
+
+  <!--Serve or clear scenario?-->
+  <arg name="serve" default="true" />
+  <arg name="clear_12a" default="false" />
+  <arg name="clear_12b" default="false" />
+
+  <!--start simulation only if not on real pr2-->
+  <include if="$(arg sim)" file="$(find race_gazebo_worlds)/launch/hybrid_demo_world.launch" >
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="launch_gazebo" value="$(arg launch_gazebo)" />
+    <arg name="serve" value="$(arg serve)" />
+    <arg name="clear_12a" value="$(arg clear_12a)" />
+    <arg name="clear_12b" value="$(arg clear_12b)" />
+  </include>
+
+  <include file="$(find race_navigation)/launch/pr2_nav_tutorial_pr2.launch" />
+  <!--Update the robot's AMCL pose hypothesis by querying the simulation ground truth-->
+  <node pkg="race_simulation_run" type="sim_amcl_update" name="sim_amcl_update" args="race_pr2" respawn="false" output="screen"></node>
+
+  <!--<include file="$(find pr2_tabletop_manipulation_launch)/launch/pr2_tabletop_manipulation.launch">-->
+  <include file="$(find race_tabletop_object_publisher)/launch/race_pr2_tabletop_manipulation.launch">
+    <arg name="sim" value="$(arg sim)" />
+    <arg name="stereo" value="$(arg stereo)" />
+  </include>
+
+  <include file="$(find race_proprioception)/launch/monitors.launch" />
+
+  <include file="$(find race_shop2_planner)/launch/race_shop2_planner.launch">
+      <arg name="domain" value="$(arg domain)" />
+  </include>
+
+  <!-- <include file="$(find race_owl_reasoner)/launch/race_owl_reasoner.launch" /> -->
+
+  <node pkg="race_bb" type="blackboard.py" name="blackboard_node" output="screen">
+    <param name="topics_config" value="$(find race_bringup)/config/bb_topics.yaml" />
+    <param name="sesame_server" value="$(arg sesame_server)" />
+    <param name="sesame_repo" value="$(arg sesame_repo)" />
+  </node>
+   
+  <include file="$(find race_spatial_reasoner)/launch/race_spatial_reasoner.launch" />
+ 
+  <node pkg="race_experience_extractor" type="experience_extractor.py" name="race_xx" output="screen">   </node>
+
+  <node pkg="race_episodes" type="episode.py" name="race_episodes" output="screen">   </node>
+
+  <node pkg="race_visualization_tools" type="area_marker_publisher.py" name="area_marker_publisher" output="screen"/>
+
+  <!-- Start the move_base_straight actionlib server -->
+  <node name="move_base_straight" pkg="move_base_straight" type="move_base_straight.py" respawn="true" output="screen" />
+
+  <!-- Start the carryarm_actionlib server -->
+  <node name="carryarm" pkg="carryarm_actionlib" type="carryarm_server" args="" respawn="true" output="screen" />
+  
+  <node name="world_state_tracker" pkg="race_world_state_tracker" type="world_state_tracker.py" output="screen" />
+
+  <!-- load common static knowledge -->
+  <include file="$(find race_bringup)/launch/load_static_knowledge.launch" />
+
+  <!--Start the PR2 SpeedMarker-->
+  <node name="race_pr2_speedmarker" pkg="race_pr2_markers" type="speedmarker" output="screen" />
+
+  <!--Start the table detector-->
+
+  <!--Unpause the Gazebo simulation-->
+  <!--Do it latest as possible before scenario execution to save CPU cycles an avoid
+  possible race conditions on Gazebo load which cause sporadically to crash it-->
+  <node if="$(arg sim)" name="race_unpause_gazebo_node" pkg="rosservice" type="rosservice"
+    args="call $(arg namespace)/gazebo/unpause_physics" output="screen"/>
+
+</launch>

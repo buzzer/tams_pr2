@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!--Start up the Gazebo GUI-->
+  <arg name="gui" default="true"/>
+  <!--Environment furniture-->
+  <arg name="furniture" default="true" />
+
+  <!--Serve or clear scenario?-->
+  <arg name="serve" default="false"/>
+  <arg name="clear_12a" default="false"/>
+  <arg name="clear_12b" default="false"/>
+  <arg name="demo_21a" default="false"/>
+  <arg name="demo_21b" default="false"/>
+  <arg name="demo_21c" default="false"/>
+  <arg name="demo_22a" default="false"/>
+  <arg name="demo_22b" default="false"/>
+  <arg name="demo_24a" default="false"/>
+  <arg name="demo_24b" default="false"/>
+  <arg name="oru_ecai" default="false"/>
+
+  <node name="race_tray_pr2" pkg="tray_pick_place" type="race_tray_pr2" output="screen" respawn="false"
+    args="
+    gui=$(arg gui)
+    furniture=$(arg furniture)
+    serve=$(arg serve)
+    clear_12a=$(arg clear_12a)
+    clear_12b=$(arg clear_12b)
+    demo_21a=$(arg demo_21a)
+    demo_21b=$(arg demo_21b)
+    demo_21c=$(arg demo_21c)
+    demo_22a=$(arg demo_22a)
+    demo_22b=$(arg demo_22b)
+    demo_24a=$(arg demo_24a)
+    demo_24b=$(arg demo_24b)
+    oru_ecai=$(arg oru_ecai)
+    "/>
+
+</launch>

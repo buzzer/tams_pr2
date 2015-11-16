@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+  <!--Load the static knowledge into the blackboard-->
+  <!--copied from: http://race.informatik.uni-hamburg.de/wordpress/wiki/index.php/Race_plan_executor-->
+  <!--Static knowledge about the environment-->
+  <node name="race_static_knowledge_node1" pkg="race_static_knowledge" type="race_static_knowledge.py" output="screen" />
+
+</launch>
+

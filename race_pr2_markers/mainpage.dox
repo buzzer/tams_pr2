@@ -1,0 +1,12 @@
+/**
+\mainpage
+\htmlinclude manifest.html
+
+\b race_pr2_markers 
+
+  race_pr2_markers provides current position, orientation and velocity information of the PR2.
+
+-->
+
+
+*/
